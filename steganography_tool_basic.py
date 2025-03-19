@@ -78,7 +78,7 @@ def embed_image_hexData(org_img, inject_img_bytes):
         inject_bytes.save(byte_array, format='PNG')
         with open(org_img, 'ab') as f:  ## will write bytedata--> the picture image remains unchanged. (look into hex-data)
             f.write(byte_array.getvalue())
-            if f.write:
+            if fwith the actual URLs of your images. This structure will make your README file more visually appealing and informative. If you need further customization, feel free to ask!.write:
                 return 1
             else:
                 return 0
@@ -158,81 +158,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-Okay, let's try to figure out what this Python code does. I'll start by reading through the code and the comments.
-
-First, the code imports several modules: os, sys, traceback, io, time, and PIL.Image. The comments mention something about appending bytes after a specific hex value FFD9. From what I remember, FFD9 is the End of Image (EOI) marker in JPEG files. So maybe the code is appending data after that marker.
-
-Looking at the functions, the first one is add_text, which opens an image file in append binary mode and writes some input text as bytes. But wait, the code converts input_text to bytes by prefixing with b, but the function's parameter is input_text. However, in the code, they have _input_text = b'input_text', which is a literal bytes string of 'input_text', not the variable. That seems like a bug. They probably meant to convert the input_text variable to bytes.
-
-Next is read_hidden, which reads the image, finds the index of FFD9, then seeks to OFFSET+2 and tries to read the data after the EOI marker. This would retrieve any data appended after the JPEG's end.
-
-The embed_image_hexData function takes another image, converts it to PNG format using PIL, saves it into a BytesIO buffer, and appends that PNG data to the original image. So this is embedding a PNG image after the JPEG's FFD9 marker.
-
-read_embedded_image_hexData tries to read the embedded image by again finding FFD9, seeking past it, and then using PIL to open the data there. But since the embedded data is a PNG, it might work if PIL can read it from the bytes stream.
-
-Then there's embed_executable_file, which simply appends the contents of an executable file to the original image. And retrieve_embedded_exec does the reverse: finds FFD9, seeks past it, and writes the remaining data to a new executable file.
-
-The main function seems to test all these functions. It prompts for input text, adds it to the image, reads hidden data, embeds another image, tries to read that embedded image, embeds an executable, and then retrieves it.
-
-So the overall purpose is to hide data (text, another image, an executable) within a JPEG file by appending it after the EOI marker. Since JPEG readers stop at FFD9, the appended data is ignored when viewing the image normally. But someone with this code can extract the hidden data.
-
-The comments mention that embedding an executable could execute upon running, which is a security risk. The code seems to be a form of steganography, hiding files within image files. However, the note about the embedded file executing upon running the program might refer to if the image is treated as an executable, which isn't standard. But if someone extracts the executable and runs it, that's when it would execute.
-
-Potential issues I see: The add_text function's byte conversion is incorrect. Also, when embedding a PNG, the code appends the PNG bytes to the JPEG, which works because the JPEG reader ignores data after FFD9. Retrieving the embedded PNG by seeking past FFD9 and reading the rest should work. For the executable, same approach—appending the EXE after FFD9, then extracting it later.
-
-In summary, this code allows hiding additional data (text, images, executables) within a JPEG image by appending the data after the JPEG's end marker. It includes functions to embed and retrieve such hidden data.
-
-This code is designed to perform steganography by embedding hidden data (such as text, images, or executables) into JPEG images. The hidden data is appended after the JPEG's End of Image (EOI) marker (FFD9), which allows it to remain undetected when the image is viewed normally. Here's a breakdown of its functionality:
-Key Features:
-
-    Append Text/Data to JPEG:
-
-        The add_text function appends custom text (as bytes) after the FFD9 marker in the JPEG file. However, there's a bug: it hardcodes b'input_text' instead of using the provided input_text variable.
-
-    Read Hidden Text/Data:
-
-        The read_hidden function locates the FFD9 marker, skips past it, and reads any appended data.
-
-    Embed Images:
-
-        embed_image_hexData converts another image (e.g., PNG) into bytes and appends it to the JPEG.
-
-        read_embedded_image_hexData extracts the embedded image data and saves it as a new PNG file.
-
-    Embed Executables:
-
-        embed_executable_file appends an executable (e.g., .exe) to the JPEG.
-
-        retrieve_embedded_exec extracts the executable from the JPEG and writes it to a file.
-
-Workflow:
-
-    The main function tests all features:
-
-        Embeds user-provided text into photo.jpg.
-
-        Reads the hidden text.
-
-        Embeds photo2.jpg into photo.jpg.
-
-        Extracts the embedded image.
-
-        Embeds and retrieves an executable (sample.exe).
-
-Risks:
-
-    Malware Potential: If an embedded executable is extracted and run, it could execute malicious code. The code itself does not trigger execution but facilitates hiding such files.
-
-    Compatibility: The hidden data is not part of the JPEG structure and relies on appending after FFD9. Some tools might strip this data.
-
-Limitations/Bugs:
-
-    The add_text function incorrectly hardcodes the byte string instead of using user input.
-
-    The code assumes all JPEGs end with FFD9, which is standard but not guaranteed in modified files.
-
-    Error handling is present but limited; some functions may fail silently.
-
-Summary:
-
-This script is a steganography tool for hiding files within JPEG images. It exploits the JPEG file structure to append data after the image's end marker, allowing covert storage and retrieval of text, images, or executables. Use cases range from benign data hiding to malicious payload delivery.
