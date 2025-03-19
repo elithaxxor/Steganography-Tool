@@ -1,5 +1,5 @@
 #steganography_tool_basic
-mport os, sys, traceback, io, time
+import os, sys, traceback, io, time
 import PIL.Image
 # copyleft material, all wrongs reserved.
 
