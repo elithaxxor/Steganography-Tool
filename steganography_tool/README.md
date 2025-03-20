@@ -1,4 +1,13 @@
 # Summary
+
+#  [in your] main.py
+from steganography_tool import add_text, read_hidden, embed_image_hexData, read_embedded_image_hexData, embed_executable_file, retrieve_embedded_exec
+
+# Example usage
+add_text('image.jpg', 'hidden message')
+hidden_data = read_hidden('image.jpg')
+print(hidden_data)
+
 ## Why Use __init__.py:
 ```
     Package Initialization: The __init__.py file is used to mark a directory as a Python package, allowing you to import modules from that directory.
