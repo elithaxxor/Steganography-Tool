@@ -1,7 +1,7 @@
 # Steganography Tool
 
 [NOTE: Git is standalone or can be packaged] 
-
+![Steganography](https://example.com/steganography-banner.jpg)
 ```
 # JPEG Steganography Code Analysis
 
@@ -37,7 +37,7 @@
 - Seeks past it
 - Writes remaining data to new executable file 
 ```
-![Steganography](https://example.com/steganography-banner.jpg)
+
 
 ## Introduction
 
