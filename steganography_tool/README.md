@@ -1,4 +1,5 @@
 # Summary
+![image](https://github.com/user-attachments/assets/fdb5cda5-323a-43c5-a21e-7104e1fe9168)
 
 #  [in your] main.py
 from steganography_tool import add_text, read_hidden, embed_image_hexData, read_embedded_image_hexData, embed_executable_file, retrieve_embedded_exec
