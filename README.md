@@ -1,5 +1,8 @@
 # Steganography Tool
 
+[NOTE: Git is standalone or can be packaged] 
+
+
 ![Steganography](https://example.com/steganography-banner.jpg)
 
 ## Introduction
