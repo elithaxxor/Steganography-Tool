@@ -48,3 +48,48 @@ image_path = 'example.jpg'
 text_to_hide = 'This is a hidden message.'
 AddText.add_text(image_path, text_to_hide)
 cd Steganography-Tool
+```
+
+### Embedding an Executable File in a JPEG Image
+
+```
+from steganography_tool import EmbedExecutableFile
+
+image_path = 'example.jpg'
+exec_path = 'hidden.exe'
+EmbedExecutableFile.embed_executable_file(image_path, exec_path)
+```
+### Embedding an Image in a JPEG Image
+
+To embed a PNG image into a JPEG image, use the embed_image_hexData function:
+```python
+from steganography_tool import EmbedImageHexData
+
+jpeg_path = 'example.jpg'
+png_path = 'hidden.png'
+EmbedImageHexData.embed_image_hexData(jpeg_path, png_path)
+```
+
+### Extracting a Hidden Executable from a JPEG Image
+```python
+from steganography_tool import RetrieveEmbeddedExec
+
+image_path = 'example.jpg'
+output_exec_path = 'extracted.exe'
+RetrieveEmbeddedExec.retrieve_embedded_exec(image_path, output_exec_path)
+
+```
+
+To extract a hidden executable file from a JPEG image, use the retrieve_embedded_exec function:
+
+#### Extracting a Hidden Image from a JPEG Image
+To extract a hidden PNG image from a JPEG image, use the read_embedded_image_hexData function:
+
+
+```Python
+from steganography_tool import ReadEmbeddedImageHexData
+
+image_path = 'example.jpg'
+hidden_image = ReadEmbeddedImageHexData.read_embedded_image_hexData(image_path)
+hidden_image.show()
+```
