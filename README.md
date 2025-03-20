@@ -1,8 +1,12 @@
 # Steganography Tool
 
 [NOTE: Git is standalone or can be packaged] 
+
 ![Steganography](https://example.com/steganography-banner.jpg)
-```
+
+![image](https://github.com/user-attachments/assets/fdb5cda5-323a-43c5-a21e-7104e1fe9168)
+
+```markdown
 # JPEG Steganography Code Analysis
 
 ## Identified Functions
