@@ -20,5 +20,4 @@ print(hidden_data)
     Reusability: Classes promote code reusability by allowing you to create instances with specific states and behaviors.
     Maintainability: Classes make the code more maintainable by grouping related functions and variables together, making it easier to understand and modify.
     Scalability: Classes provide a scalable structure for adding new features and functionalities without disrupting the existing codebase.
-```
-***By organizing your code into classes and using an __init__.py file, you create a more modular, maintainable, and scalable codebase.
+``` ![image](https://github.com/user-attachments/assets/fdb5cda5-323a-43c5-a21e-7104e1fe9168)
