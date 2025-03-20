@@ -1,6 +1,11 @@
-from steganography_tool import recv_msg
+from steganography_tool import hide_message
 
-image_path = 'path/to/output_image.png'
+class MessageHider:
+    def __init__(self, image_path, message, output_path):
+        self.image_path = image_path
+        self.message = message
+        self.output_path = output_path
 
-message = retrieve_message(image_path)
-print(f'The hidden message is: {message}')
+    def hide_message(self):
+        hide_message(self.image_path, self.message, self.output_path)
+        print(f'Message hidden in {self.output_path}')
