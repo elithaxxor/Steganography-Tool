@@ -1,7 +1,6 @@
 # Steganography Tool
 
 ![Steganography](https://example.com/steganography-banner.jpg)
-![image](https://github.com/user-attachments/assets/fdb5cda5-323a-43c5-a21e-7104e1fe9168)
 
 ## Introduction
 
@@ -11,6 +10,7 @@ Steganography is the practice of concealing messages or information within other
 
 ## Overview
 The Steganography Tool is a Python-based utility for embedding and extracting hidden data within JPEG images. This tool leverages the JPEG file structure to covertly store various types of data, such as text, images, and executable files, making it an effective means for secure data transmission.
+![image](https://github.com/user-attachments/assets/fdb5cda5-323a-43c5-a21e-7104e1fe9168)
 
 ## Features
 - **Text Steganography**: Embed and extract hidden text within JPEG images.
