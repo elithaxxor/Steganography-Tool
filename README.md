@@ -1,5 +1,7 @@
 # Steganography Tool
 
+## TODO: SEPERATE THE LIBRARY FROM STANDALONE [V1 / V2]
+
 [NOTE: Git is standalone or can be packaged] 
 
 ![Steganography](https://example.com/steganography-banner.jpg)
