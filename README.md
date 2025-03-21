@@ -4,6 +4,33 @@
 
 [NOTE: Git is standalone or can be packaged] 
 
+** Steganography hacking involves concealing information within other seemingly harmless files (like images, audio, or text) to bypass detection and security measures, often used by attackers to hide malicious code or data. 
+
+# Steganography: Hidden in Plain Sight
+
+Steganography, derived from the Greek words meaning "covered writing," is the art and science of concealing information within a carrier medium, such as an image, audio file, or text. The goal is to hide the presence of the secret message so effectively that its existence remains undetected.
+
+## What is Steganography?
+
+Essentially, steganography involves embedding secret data within a seemingly innocuous file. Unlike cryptography, which scrambles data to make it unreadable, steganography hides the data altogether.
+
+## How it Works
+
+* **Embedding Secret Data:** Attackers embed secret data within a carrier medium, often by subtly altering the least significant bits (LSBs) of the data. For example, in an image, this might involve slightly changing the color values of pixels.
+* **Extraction:** The hidden data can be extracted by someone who knows the method and possesses the carrier medium.
+* **Versatility:** Steganography can be used to hide various data types, including text, images, audio, and video.
+
+## Why Hackers Use Steganography
+
+* **Evading Detection:** By concealing malicious code or data within seemingly harmless files, attackers can bypass security systems designed to detect and block threats.
+* **Covering Tracks:** Hiding their activities allows attackers to maintain prolonged access to compromised systems or networks.
+* **Exfiltrating Data:** Steganography provides a covert method for transferring sensitive data out of a compromised system.
+
+## Examples of Steganography in Cybersecurity
+
+* **Hiding Malware in Images:** Attackers can embed malicious code within image files, which victims may unknowingly open and execute.
+* **Embedding Scripts in Documents:** Malicious scripts can be concealed within seemingly harmless documents, such as Excel or Word files, triggering execution when the document is opened.
+* **Steganographic Communication:** Attackers can use steganography to communicate with each other or with deployed malware on a victim's system, maintaining covert command and control.
 ![Steganography](https://example.com/steganography-banner.jpg)
 
 ![image](https://github.com/user-attachments/assets/fdb5cda5-323a-43c5-a21e-7104e1fe9168)
