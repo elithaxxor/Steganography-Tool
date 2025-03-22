@@ -2,7 +2,12 @@
 
 ## TODO: SEPERATE THE LIBRARY FROM STANDALONE [V1 / V2]
 
+![image](https://github.com/user-attachments/assets/879f138d-512b-4ae2-bf29-528f852e1b62)
+
+
 [NOTE: Git is standalone or can be packaged] 
+Steganography: Hidden in Plain Sight
+Steganography, derived from the Greek words meaning "covered writing," is the art and science of concealing information within a carrier medium, such as an image, audio file, or text. The goal is to hide the presence of the secret message so effectively that its existence remains undetected.
 
 ** Steganography hacking involves concealing information within other seemingly harmless files (like images, audio, or text) to bypass detection and security measures, often used by attackers to hide malicious code or data. 
 
