@@ -1,0 +1,10 @@
+# Required libraries for the CLI-based EmbedExtract tool
+
+colorama==0.4.6
+cryptography==39.0.1
+PyPDF2==3.0.1
+qrcode==7.3
+pyzbar==0.1.9
+Pillow==9.4.0
+
+# zlib is part of the standard library, no need to install
