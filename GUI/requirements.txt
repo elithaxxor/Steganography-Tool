@@ -1,9 +1,9 @@
 # Required libraries for the GUI-based EmbedExtract tool
 
-colorama==0.4.6
-cryptography==39.0.1
-PyPDF2==3.0.1
-qrcode==7.3
-pyzbar==0.1.9
-Pillow==9.4.0
-PySimpleGUI==4.60.4
+PySimpleGUI>=4.60.0
+cryptography>=39.0.0
+Pillow>=9.4.0
+pypdf2>=3.0.0
+qrcode>=7.4.2
+pyzbar>=0.1.9
+zlib-wrapper>=0.1.3
