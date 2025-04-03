@@ -7,6 +7,7 @@ from cryptography.fernet import Fernet
 
 from EmbedExtract import Cryptography, Compressor, EmbedExtract
 
+# Configure logging
 logging.basicConfig(
     filename='embed_extract.log',
     level=logging.INFO,
@@ -14,6 +15,7 @@ logging.basicConfig(
 )
 
 def setup_logging():
+    """Setup logging configuration."""
     logging.basicConfig(
         filename='embed_extract.log',
         level=logging.INFO,
@@ -21,6 +23,7 @@ def setup_logging():
     )
 
 def create_main_window():
+    """Create the main GUI window."""
     sg.theme('DarkBlue3')
     layout = [
         [sg.Text('EmbedExtract GUI', size=(30, 1), justification='center', font=('Helvetica', 20), relief=sg.RELIEF_RIDGE)],
@@ -48,12 +51,14 @@ def create_main_window():
     return sg.Window('EmbedExtract GUI', layout, element_justification='center', finalize=True)
 
 def handle_embed(embed_extract, crypto, compressor, values):
+    """Handle the embedding process."""
     file_format = values['format']
     carrier_path = values['carrier']
     payload_path = values['payload']
     enc = values['encrypt']
     comp = values['compress']
 
+    # Check if the provided carrier and payload files are valid
     if file_format in ['jpeg', 'png', 'gif']:
         if not (carrier_path and os.path.isfile(carrier_path)):
             sg.popup_error('Invalid carrier file.')
@@ -62,6 +67,7 @@ def handle_embed(embed_extract, crypto, compressor, values):
             sg.popup_error('Invalid payload file.')
             return
         try:
+            # Read the payload file
             with open(payload_path, 'rb') as f:
                 data = f.read()
             if comp:
@@ -70,6 +76,7 @@ def handle_embed(embed_extract, crypto, compressor, values):
             if enc:
                 data = crypto.encrypt(data)
                 logging.info('Data encrypted for embedding.')
+            # Embed the data into the carrier file
             success = embed_extract.embed_binary(carrier_path, data, file_format)
             if success:
                 sg.popup('Data embedded successfully!')
@@ -84,12 +91,14 @@ def handle_embed(embed_extract, crypto, compressor, values):
     # Similar handling for 'pdf' and 'qr' formats...
 
 def handle_extract(embed_extract, crypto, compressor, values):
+    """Handle the extraction process."""
     file_format = values['x_format']
     carrier_path = values['x_carrier']
     output_path = values['x_output']
     enc = values['x_encrypt']
     comp = values['x_compress']
 
+    # Check if the provided carrier file and output path are valid
     if file_format in ['jpeg', 'png', 'gif']:
         if not (carrier_path and os.path.isfile(carrier_path)):
             sg.popup_error('Invalid file.')
@@ -98,6 +107,7 @@ def handle_extract(embed_extract, crypto, compressor, values):
             sg.popup_error('No output path given.')
             return
         try:
+            # Extract the data from the carrier file
             data = embed_extract.extract_binary(carrier_path, file_format)
             if data is None:
                 sg.popup_error('No data found or extraction error.')
@@ -109,6 +119,7 @@ def handle_extract(embed_extract, crypto, compressor, values):
             if comp:
                 data = compressor.decompress(data)
                 logging.info('Data decompressed.')
+            # Save the extracted data to the output path
             with open(output_path, 'wb') as f:
                 f.write(data)
             sg.popup(f'Data extracted to {output_path}')
@@ -120,12 +131,14 @@ def handle_extract(embed_extract, crypto, compressor, values):
     # Similar handling for 'pdf' and 'qr' formats...
 
 def main():
+    """Main function to setup and run the GUI application."""
     setup_logging()
     embed_extract = EmbedExtract()
     crypto = Cryptography()
     compressor = Compressor()
     window = create_main_window()
 
+    # Event loop to process events and get the values of the inputs
     while True:
         event, values = window.read()
         if event == sg.WIN_CLOSED or event == 'Exit':
