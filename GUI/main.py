@@ -56,6 +56,14 @@ def create_main_window():
         [sg.Text('Progress:'), sg.ProgressBar(100, orientation='h', size=(20, 20), key='progress_extract')],
         [sg.Text('', size=(40, 2), key='status_extract')]
     ]
+     detect_tab_layout = [
+        [sg.Text('Select a file to analyze for steganography:')],
+        [sg.Input(key='detect_file'), sg.FileBrowse()],
+        [sg.Button('Detect Steganography')],
+        [sg.Text('Progress:'), sg.ProgressBar(100, orientation='h', size=(20, 20), key='progress_detect')],
+        [sg.Text('', size=(50, 1), key='result_detect')],
+        [sg.Multiline('', size=(60, 10), key='details_detect', disabled=True)]
+    ]
     
     layout = [
         [sg.Text('EmbedExtract GUI', size=(30, 1), justification='center', font=('Helvetica', 20), relief=sg.RELIEF_RIDGE)],
@@ -357,6 +365,50 @@ def handle_extract_single(window, embed_extract, crypto, compressor, values):
         window['status_extract'].update(f'Error: {str(e)}')
         sg.popup_error(f'Error: {str(e)}')
         logging.exception('Exception in data extraction')
+
+def handle_detect(window, stego_detector, values):
+    """Handle steganography detection process."""
+    file_path = values['detect_file']
+    
+    # Check if the provided file is valid
+    if not (file_path and os.path.isfile(file_path)):
+        sg.popup_error('Invalid file.')
+        return
+    
+    try:
+        window['progress_detect'].update(10)
+        window['result_detect'].update('Analyzing file...')
+        window['details_detect'].update('')
+        
+        # Perform detection
+        probability, details, file_type, interpretation = stego_detector.detect_file(file_path)
+        
+        window['progress_detect'].update(100)
+        
+        # Format result message
+        result_message = f"Detection Result: {probability:.2%} - {interpretation}"
+        window['result_detect'].update(result_message)
+        
+        # Format details
+        details_text = f"File Type: {file_type}\n\n"
+        details_text += f"Analysis Details:\n"
+        
+        for key, value in details.items():
+            if isinstance(value, float):
+                details_text += f"- {key}: {value:.4f}\n"
+            else:
+                details_text += f"- {key}: {value}\n"
+        
+        window['details_detect'].update(details_text)
+        
+        logging.info(f'Steganography detection completed for {file_path}. Probability: {probability:.2%}')
+    
+    except Exception as e:
+        window['result_detect'].update(f'Error: {str(e)}')
+        window['details_detect'].update(f'An error occurred during detection:\n{str(e)}')
+        sg.popup_error(f'Error: {str(e)}')
+        logging.exception('Exception in steganography detection')
+
 
 def handle_extract_batch(window, batch_processor, values):
     """Handle batch extraction process."""
