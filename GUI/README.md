@@ -1,4 +1,4 @@
-# 🔒 Steganography Tool
+# 🔒 Steganography Tool v1.4
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.6+-green.svg)
@@ -19,13 +19,7 @@ The Steganography Tool provides a powerful yet user-friendly graphical interface
 
 ## ✨ Features
 
-- **📊 Multiple File Format Support**: Hide data within JPEG, PNG, GIF images, PDF files, WAV audio files, MP4 video files, or generate a QR code with the hidden data
-- **🔍 Data Extraction**: Seamlessly retrieve hidden data from supported file formats
-- **🔐 Strong Encryption**: Optionally encrypt data before embedding using Fernet symmetric encryption for enhanced security
-- **📦 Data Compression**: Reduce the size of embedded data using zlib compression
-- **🖥️ Intuitive GUI**: Easy-to-use interface built with PySimpleGUI for improved user experience
-- **📝 Comprehensive Logging**: Detailed logging of operations for debugging and audit purposes
-- **⚙️ Cross-Platform**: Works on Windows, macOS, and Linux
+- **📊 Multiple File Format Support**: Hide data within JPEG, PNG, GIF images, PDF files, WAV audio files, MP4 video files
 
 ## 🔬 How LSB Steganography Works
 
