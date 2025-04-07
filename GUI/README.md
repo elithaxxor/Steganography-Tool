@@ -721,14 +721,430 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 </div>
 ``` 
 
-This enhanced README features:
-- 🎯 Visual hierarchy with icons and diagrams
-- 🔍 Interactive elements (collapsible sections)
-- 📊 Comparative tables and performance metrics
-- 🖼️ Simulated GUI previews
-- 🧩 Clear technical documentation
-- 🚀 Quick-start guides
-- 🤝 Contribution encouragement
 
-The structure balances technical detail with readability, using mermaid diagrams for complex workflows and mindmaps for feature overviews. Placeholder images can be replaced with actual screenshots for production use.
-x
+# 🔐 Steganography Tool GUI
+
+<div align="center">
+
+![Steganography Tool Banner](https://via.placeholder.com/1200x300/0d1117/38b0de?text=Steganography+Tool+GUI)
+
+[![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![GUI](https://img.shields.io/badge/GUI-Tkinter-orange?style=for-the-badge&logo=tkinter&logoColor=white)](https://docs.python.org/3/library/tkinter.html)
+[![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)](https://github.com/elithaxxor/Steganography-Tool)
+
+**The art of hiding secrets in plain sight - now with a powerful GUI**
+
+</div>
+
+<p align="center">
+  This user-friendly GUI application provides powerful steganography capabilities, allowing you to seamlessly hide secret messages or files within innocent-looking images. Perfect for privacy enthusiasts, security professionals, or anyone interested in the fascinating world of information hiding.
+</p>
+
+---
+
+## 📋 Table of Contents
+
+- [✨ Features](#-features)
+- [🌟 Why Steganography?](#-why-steganography)
+- [🖼️ Screenshots](#-screenshots)
+- [🔧 Installation](#-installation)
+- [🚀 Getting Started](#-getting-started)
+- [💡 How It Works](#-how-it-works)
+- [🔍 Technical Details](#-technical-details)
+- [👨‍💻 Usage Examples](#-usage-examples)
+- [🛠️ Advanced Options](#️-advanced-options)
+- [📊 Supported Formats](#-supported-formats)
+- [❓ Troubleshooting](#-troubleshooting)
+- [🤝 Contributing](#-contributing)
+- [📜 License](#-license)
+- [✉️ Contact](#️-contact)
+
+---
+
+## ✨ Features
+
+<div align="center">
+
+```mermaid
+mindmap
+  root((Steganography GUI))
+    Data Hiding
+      🔐 Text embedding
+      📁 File concealment
+      🔑 Password protection
+    GUI Features
+      🖱️ Drag-and-drop
+      📊 Capacity estimation
+      🔍 Image preview
+    Security
+      🔒 AES-256 encryption
+      🧩 LSB steganography
+      🔄 Random distribution
+    File Support
+      📷 PNG format
+      🖼️ BMP format
+      🎨 JPG format
+```
+
+</div>
+
+- **🖱️ Intuitive GUI Interface**: Easy-to-use graphical interface for all operations
+- **💾 Multiple Data Types**: Hide text messages or entire files within images
+- **🔒 Strong Encryption**: Optional AES-256 encryption for your hidden data
+- **📊 Capacity Calculator**: Automatically estimates how much data can be hidden in an image
+- **🔍 Preview Capability**: View images before and after embedding
+- **📷 Multiple Image Formats**: Support for PNG, BMP, and JPG carrier files
+- **🧩 Bit Selection**: Choose how many bits to use for steganography (balance between capacity and detectability)
+- **🔄 Batch Processing**: Process multiple files at once (Pro version)
+- **📋 Copy/Paste Support**: Easily copy extracted text to clipboard
+- **📱 Cross-Platform**: Works on Windows, macOS, and Linux
+
+---
+
+## 🌟 Why Steganography?
+
+<div align="center">
+
+| 🔒 Encryption | 🔐 Steganography |
+|---------------|------------------|
+| Makes data unreadable | Makes data invisible |
+| Obvious that secret data exists | No indication secret data exists |
+| Single layer of protection | Can be combined with encryption |
+| Vulnerable to forced disclosure | Provides plausible deniability |
+
+</div>
+
+> 💡 **"Security through obscurity"** takes on new meaning with steganography. When nobody knows you have a secret, you don't have to defend it.
+
+Steganography offers unique advantages for:
+- ✅ Private communications
+- ✅ Digital watermarking
+- ✅ Protecting sensitive information
+- ✅ Bypassing censorship
+- ✅ Creative digital art projects
+
+---
+
+## 🖼️ Screenshots
+
+<div align="center">
+  <p><strong>Main Application Window</strong></p>
+  <img src="https://via.placeholder.com/800x450/0d1117/38b0de?text=Main+Application+Window" width="80%">
+  
+  <p><strong>Embedding Process</strong></p>
+  <img src="https://via.placeholder.com/800x450/0d1117/38b0de?text=Embedding+Process" width="80%">
+  
+  <p><strong>Extraction Results</strong></p>
+  <img src="https://via.placeholder.com/800x450/0d1117/38b0de?text=Extraction+Results" width="80%">
+</div>
+
+---
+
+## 🔧 Installation
+
+### Prerequisites
+- Python 3.6 or higher
+- Tkinter (usually included with Python)
+- Pillow (PIL Fork)
+- Cryptography library
+
+### Step 1: Clone the repository
+```bash
+git clone https://github.com/elithaxxor/Steganography-Tool.git
+cd Steganography-Tool/GUI
+```
+
+### Step 2: Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+<details>
+<summary>📋 View requirements.txt</summary>
+
+```
+pillow>=8.2.0
+cryptography>=3.4.7
+numpy>=1.20.3
+tqdm>=4.61.1
+```
+</details>
+
+### Step 3: Launch the application
+```bash
+python stego_gui.py
+```
+
+---
+
+## 🚀 Getting Started
+
+### Hiding Information (Embedding)
+
+<div align="center">
+
+```mermaid
+graph TD
+    A[Start Application] --> B[Select 'Embed' Tab]
+    B --> C[Choose Carrier Image]
+    C --> D{Hide Text or File?}
+    D -->|Text| E[Enter Secret Message]
+    D -->|File| F[Select File to Hide]
+    E --> G[Set Password Optional]
+    F --> G
+    G --> H[Click 'Embed']
+    H --> I[Save Output Image]
+```
+
+</div>
+
+1. Launch the application and select the **Embed** tab
+2. Click **Browse** to select a carrier image
+3. Enter your secret message or select a file to hide
+4. Optionally set a password for encryption
+5. Click **Embed** to create your steganographic image
+6. Save the resulting image to your desired location
+
+### Revealing Information (Extracting)
+
+1. Launch the application and select the **Extract** tab
+2. Click **Browse** to select a steganographic image
+3. Enter the password (if one was used during embedding)
+4. Click **Extract** to reveal the hidden content
+5. Save the extracted file or copy the revealed text
+
+---
+
+## 💡 How It Works
+
+<div align="center">
+
+![LSB Steganography Visualization](https://via.placeholder.com/800x250/0d1117/38b0de?text=LSB+Steganography+Visualization)
+
+</div>
+
+### LSB (Least Significant Bit) Technique
+
+This tool primarily uses the LSB technique, which works by replacing the least significant bits of pixel data in an image with bits from the secret message:
+
+```
+Original pixel: 10101100 11001101 11110011
+                       ↓         ↓        ↓
+Secret data bits:      1         0        1
+                       ↓         ↓        ↓
+Modified pixel: 10101101 11001100 11110011
+                       ↑         ↑        ↑
+                 Changed    Changed  Unchanged
+```
+
+These changes are so subtle they're virtually undetectable to the human eye, but can be extracted with the right software (this tool).
+
+---
+
+## 🔍 Technical Details
+
+### Encryption Process
+
+<div align="center">
+
+```mermaid
+graph TD
+    A[Original Data] --> B[Compression Optional]
+    B --> C{Password Provided?}
+    C -->|Yes| D[Generate Encryption Key]
+    C -->|No| E[Raw Data]
+    D --> F[AES-256 Encryption]
+    F --> G[Encrypted Data]
+    E --> H[Steganographic Encoding]
+    G --> H
+    H --> I[Modified Image]
+    
+    style A fill:#3498db,stroke:#333,stroke-width:2px,color:white
+    style D fill:#e74c3c,stroke:#333,stroke-width:2px,color:white
+    style H fill:#2ecc71,stroke:#333,stroke-width:2px,color:white
+    style I fill:#f39c12,stroke:#333,stroke-width:2px,color:white
+```
+
+</div>
+
+### Key Aspects of the Implementation:
+
+- **💾 Payload Structure**: Data is stored with a header containing metadata like data type and size
+- **📊 Capacity Calculation**: The tool analyzes the carrier image to determine maximum data capacity
+- **🔐 Encryption**: AES-256 in CBC mode with a securely derived key (PBKDF2)
+- **🧠 Bit Selection**: Customizable bits-per-byte setting to balance capacity vs. detectability
+- **📝 Error Handling**: Comprehensive validation to prevent data corruption
+- **🔄 Distribution Patterns**: Options for sequential or randomized bit distribution
+
+---
+
+## 👨‍💻 Usage Examples
+
+### Example 1: Hiding a Text Message
+
+```
+1. Launch stego_gui.py
+2. Select the "Embed" tab
+3. Click "Browse" and select "vacation.png"
+4. Select "Text" mode
+5. Enter "Meet me at the usual place at 9pm tomorrow" in the text field
+6. Enter "MySecretPassword123" in the password field
+7. Click "Embed"
+8. Save as "innocent_vacation.png"
+```
+
+### Example 2: Extracting a Hidden File
+
+```
+1. Launch stego_gui.py
+2. Select the "Extract" tab
+3. Click "Browse" and select "family_photo.png"
+4. Enter the password "TopSecret2023"
+5. Click "Extract"
+6. Save the extracted file to your desired location
+```
+
+---
+
+## 🛠️ Advanced Options
+
+<details>
+<summary>🔧 Click to view advanced settings</summary>
+
+### Bit Depth Selection
+- **1-bit**: Highest security, lowest capacity
+- **2-bit**: Good balance (default)
+- **3-bit**: Higher capacity, slightly reduced security
+- **4-bit**: Maximum capacity, potential visual artifacts
+
+### Distribution Patterns
+- **Sequential**: Faster processing, potentially more detectable
+- **Random**: More secure, uses a password-derived seed for randomization
+
+### Image Format Considerations
+- **PNG**: Recommended format (lossless)
+- **BMP**: Excellent for steganography (uncompressed)
+- **JPG**: Use with caution (lossy compression may destroy hidden data)
+
+### Performance Settings
+- **Buffer Size**: Adjust memory usage for large files
+- **Progress Updates**: Frequency of UI updates during processing
+
+</details>
+
+---
+
+## 📊 Supported Formats
+
+### Carrier Image Formats
+
+| Format | Support Level | Notes |
+|--------|---------------|-------|
+| PNG | ★★★★★ | Best option, lossless format |
+| BMP | ★★★★★ | Excellent choice, no compression |
+| TIFF | ★★★☆☆ | Good support, less common format |
+| JPG | ★★☆☆☆ | Limited support, lossy compression can damage hidden data |
+| GIF | ★☆☆☆☆ | Basic support, limited color palette |
+
+### Data Formats for Hiding
+
+- **✅ Text**: UTF-8 encoded text messages
+- **✅ Documents**: PDF, DOCX, TXT, etc.
+- **✅ Images**: JPG, PNG, GIF, etc.
+- **✅ Archives**: ZIP, RAR, 7Z, etc.
+- **✅ Any Binary Data**: All file types supported (size limited by carrier capacity)
+
+---
+
+## ❓ Troubleshooting
+
+<details>
+<summary>🔍 Common Issues & Solutions</summary>
+
+### Application won't start
+- Ensure Python 3.6+ is installed and in your PATH
+- Verify all dependencies are installed: `pip install -r requirements.txt`
+- Check for errors in the console output
+
+### "Carrier capacity exceeded" error
+- Choose a larger carrier image
+- Reduce the size of the data you're trying to hide
+- Try enabling compression (for text)
+- Use lower quality JPGs for hiding (but beware of compression artifacts)
+
+### Cannot extract data correctly
+- Ensure you're using the exact same password used during embedding
+- Verify the steganographic image hasn't been modified or resaved
+- Check if you're using the correct extraction mode (text vs. file)
+
+### Poor image quality after embedding
+- Use PNG or BMP formats instead of JPG
+- Reduce the number of bits used per byte
+- Distribute the data across multiple images
+
+### "Image processing error" message
+- Ensure the image file isn't corrupted
+- Try converting the image to a different format before using as carrier
+- Check file permissions (read/write access)
+
+</details>
+
+---
+
+## 🤝 Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### Development Roadmap
+
+- 🚀 Multi-language support
+- 🚀 Dark/light theme toggle
+- 🚀 Mobile application version
+- 🚀 Audio file steganography
+- 🚀 Steganography detection tools
+- 🚀 Cloud integration
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## ✉️ Contact
+
+<div align="center">
+  
+**Created by [elithaxxor](https://github.com/elithaxxor)**
+
+[![GitHub](https://img.shields.io/badge/GitHub-elithaxxor-181717?style=for-the-badge&logo=github)](https://github.com/elithaxxor)
+
+<p>Created with ❤️ for the security and privacy community</p>
+
+</div>
+
+---
+
+<p align="center">
+  <img src="https://via.placeholder.com/1200x300/0d1117/38b0de?text=Hide+in+Plain+Sight:+Steganography+Tool" alt="Footer Banner">
+</p>
+
+<div align="center">
+
+**[Documentation](https://github.com/elithaxxor/Steganography-Tool/wiki)** | 
+**[Report Bug](https://github.com/elithaxxor/Steganography-Tool/issues)** | 
+**[Request Feature](https://github.com/elithaxxor/Steganography-Tool/issues)**
+
+<p align="center">
+⭐ Star this repo if you found it useful! ⭐
+</p>
+
+</div>
