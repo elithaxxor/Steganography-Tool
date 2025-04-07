@@ -454,6 +454,7 @@ def main():
     crypto = Cryptography()
     compressor = Compressor()
     batch_processor = BatchProcessor(embed_extract, crypto, compressor)
+    stego_detector = StegoDetector()
     window = create_main_window()
 
     # Event loop to process events and get the values of the inputs
@@ -502,6 +503,10 @@ def main():
         elif event == 'Extract Data':
             if values['x_single_mode']:
                 handle_extract_single(window, embed_extract, crypto, compressor, values)
+
+        elif event == 'Detect Steganography':
+            handle_detect(window, stego_detector, values)
+
             else:  # batch_mode
                 handle_extract_batch(window, batch_processor, values)
 
