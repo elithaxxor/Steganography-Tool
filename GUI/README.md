@@ -114,3 +114,186 @@ This repository provides a steganography tool that allows users to embed and ext
    ```bash
    git clone https://github.com/elithaxxor/Steganography-Tool.git
    cd Steganography-Tool
+
+Sure! Here is a `MARKDOWN.md` file that includes more usage examples:
+
+```markdown
+# Steganography Tool
+
+This repository provides a steganography tool that allows users to embed and extract data into/from various file formats, including images (JPEG, PNG, GIF), PDFs, and QR codes. The tool also supports encryption and compression of data for enhanced security and efficiency.
+
+## Features
+
+- **Image Steganography**: Embed and extract data into/from image files (JPEG, PNG, GIF).
+- **PDF Steganography**: Embed and extract data into/from PDF files.
+- **QR Code Steganography**: Embed and extract data into/from QR code images.
+- **Encryption**: Encrypt and decrypt data using the Fernet symmetric encryption.
+- **Compression**: Compress and decompress data using zlib.
+
+## Requirements
+
+- Python 3.x
+- Required Python packages:
+  - `os`
+  - `io`
+  - `zlib`
+  - `base64`
+  - `logging`
+  - `PyPDF2`
+  - `qrcode`
+  - `PIL` (Pillow)
+  - `cryptography`
+  - `pyzbar`
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/elithaxxor/Steganography-Tool.git
+   cd Steganography-Tool
+   ```
+
+2. Install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Usage
+
+### Image Steganography
+
+#### Embed Data into an Image
+
+```python
+from GUI.EmbedExtract import EmbedExtract
+
+embed_extract = EmbedExtract()
+
+# Embed data into a PNG image
+success = embed_extract.embed_binary('image.png', b'secret data', 'png')
+if success:
+    print("Data embedded successfully.")
+```
+
+#### Extract Data from an Image
+
+```python
+from GUI.EmbedExtract import EmbedExtract
+
+embed_extract = EmbedExtract()
+
+# Extract data from the embedded PNG image
+extracted_data = embed_extract.extract_binary('image_embedded.png', 'png')
+if extracted_data:
+    print("Data extracted:", extracted_data)
+```
+
+### PDF Steganography
+
+#### Embed Data into a PDF
+
+```python
+from GUI.EmbedExtract import EmbedExtract
+
+embed_extract = EmbedExtract()
+
+# Embed data into a PDF file
+success = embed_extract.embed_pdf('document.pdf', b'secret data')
+if success:
+    print("Data embedded successfully.")
+```
+
+#### Extract Data from a PDF
+
+```python
+from GUI.EmbedExtract import EmbedExtract
+
+embed_extract = EmbedExtract()
+
+# Extract data from the embedded PDF file
+extracted_data = embed_extract.extract_pdf('document_embedded.pdf')
+if extracted_data:
+    print("Data extracted:", extracted_data)
+```
+
+### QR Code Steganography
+
+#### Embed Data into a QR Code
+
+```python
+from GUI.EmbedExtract import EmbedExtract
+
+embed_extract = EmbedExtract()
+
+# Embed data into a QR code image
+success = embed_extract.embed_qr(b'secret data', 'qrcode.png')
+if success:
+    print("QR code created successfully.")
+```
+
+#### Extract Data from a QR Code
+
+```python
+from GUI.EmbedExtract import EmbedExtract
+
+embed_extract = EmbedExtract()
+
+# Extract data from the QR code image
+extracted_data = embed_extract.extract_qr('qrcode.png')
+if extracted_data:
+    print("Data extracted:", extracted_data)
+```
+
+### Encryption and Compression
+
+#### Encrypt and Decrypt Data
+
+```python
+from GUI.EmbedExtract import Cryptography
+
+crypto = Cryptography()
+
+# Encrypt data
+encrypted_data = crypto.encrypt(b'secret data')
+print("Encrypted data:", encrypted_data)
+
+# Decrypt data
+decrypted_data = crypto.decrypt(encrypted_data)
+print("Decrypted data:", decrypted_data)
+```
+
+#### Compress and Decompress Data
+
+```python
+from GUI.EmbedExtract import Compressor
+
+compressor = Compressor()
+
+# Compress data
+compressed_data = compressor.compress(b'secret data')
+print("Compressed data:", compressed_data)
+
+# Decompress data
+decompressed_data = compressor.decompress(compressed_data)
+print("Decompressed data:", decompressed_data)
+```
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Author
+
+Created by [elithaxxor](https://github.com/elithaxxor).
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request with your changes.
+
+## Contact
+
+For any inquiries, please contact [elithaxxor](https://github.com/elithaxxor).
+
+```
+
+Feel free to add this `MARKDOWN.md` file to your repository.
