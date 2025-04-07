@@ -3,6 +3,15 @@
 
 <div align="center">
 
+⚠️ Disclaimer
+
+This tool is intended for security professionals to perform authorized security assessments only. Unauthorized scanning of networks may violate local, state, and federal laws. The author is not responsible for misuse or damage caused by this tool.
+
+@copyleft my mistakes yours. feel free to incorporate it into your work. however, I'm not responsible for your actions. do not be unethical. do not harm others. do the right thing.
+</div>
+
+<div align="center">
+
 ![Steganography Tool Banner](https://via.placeholder.com/1200x300/0d1117/38b0de?text=Steganography+Tool)
 
 [![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
