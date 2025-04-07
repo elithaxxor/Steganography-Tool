@@ -1,169 +1,105 @@
-# Steganography Tool
+# 🔒 Steganography Tool
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.6+-green.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-orange.svg)
+![Stars](https://img.shields.io/github/stars/elithaxxor/Steganography-Tool?style=social)
 
-## Overview
+<p align="center">
+  <img src="https://i.imgur.com/P4oGIBv.png" width="200" alt="Steganography Logo">
+</p>
 
-The Steganography Tool provides a graphical user interface (GUI) for embedding and extracting data within various file formats using steganography techniques. It supports encryption and compression of data to ensure security and efficiency.
+<p align="center">
+  <b>Hide data in plain sight with advanced steganography techniques</b>
+</p>
 
-## Features
+## 📖 Overview
 
-- **Embed Data**: Hide data within JPEG, PNG, GIF images, PDF files, or generate a QR code with the hidden data.
-- **Extract Data**: Retrieve hidden data from the supported file formats.
-- **Encryption**: Optionally encrypt data before embedding to enhance security.
-- **Compression**: Optionally compress data before embedding to save space.
-- **User-Friendly GUI**: Easy-to-use interface built with PySimpleGUI.
+The Steganography Tool provides a powerful yet user-friendly graphical interface for embedding and extracting data within various file formats using advanced steganography techniques. This tool enables you to hide sensitive information within ordinary-looking files, making it invisible to casual observers. With additional features like encryption and compression, your hidden data remains secure and efficient.
 
-## Installation
+## ✨ Features
+
+- **📊 Multiple File Format Support**: Hide data within JPEG, PNG, GIF images, PDF files, or generate a QR code with the hidden data
+- **🔍 Data Extraction**: Seamlessly retrieve hidden data from supported file formats
+- **🔐 Strong Encryption**: Optionally encrypt data before embedding using Fernet symmetric encryption for enhanced security
+- **📦 Data Compression**: Reduce the size of embedded data using zlib compression
+- **🖥️ Intuitive GUI**: Easy-to-use interface built with PySimpleGUI for improved user experience
+- **📝 Comprehensive Logging**: Detailed logging of operations for debugging and audit purposes
+- **⚙️ Cross-Platform**: Works on Windows, macOS, and Linux
+
+## 🛠️ Installation
 
 ### Prerequisites
 
 - Python 3.6 or higher
+- Git (for cloning the repository)
 
 ### Steps
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/elithaxxor/Steganography-Tool.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd Steganography-Tool
-    ```
-3. Install the required dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-## Usage
-
-1. Run the main GUI script:
-    ```bash
-    python GUI/main.py
-    ```
-
-2. The GUI window will open with two main tabs: `Embed` and `Extract`.
-
-### Embed Data
-
-- **File Format**: Select the format of the carrier file (JPEG, PNG, GIF, PDF, QR).
-- **Carrier File**: Browse and select the file in which to hide the data.
-- **Payload File**: Browse and select the file containing the data to be hidden.
-- **Optional Encryption**: Check the box to encrypt the data before embedding.
-- **Optional Compression**: Check the box to compress the data before embedding.
-- Click `Embed Data` to start the embedding process.
-
-### Extract Data
-
-- **File Format**: Select the format of the carrier file (JPEG, PNG, GIF, PDF, QR).
-- **Carrier File**: Browse and select the file from which to extract the data.
-- **Output Path**: Specify the path where the extracted data will be saved.
-- **Encrypted**: Check the box if the data was encrypted.
-- **Compressed**: Check the box if the data was compressed.
-- Click `Extract Data` to start the extraction process.
-
-## Contributing
-
-Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) for more information.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-If you have any questions or feedback, feel free to reach out to the project maintainer at [maintainer@example.com](mailto:maintainer@example.com).
-
-## Screenshots
-
-![Embed Tab](screenshots/embed_tab.png)
-*Embed Tab*
-
-![Extract Tab](screenshots/extract_tab.png)
-*Extract Tab*
-# Steganography Tool
-
-This repository provides a steganography tool that allows users to embed and extract data into/from various file formats, including images (JPEG, PNG, GIF), PDFs, and QR codes. The tool also supports encryption and compression of data for enhanced security and efficiency.
-
-## Features
-
-- **Image Steganography**: Embed and extract data into/from image files (JPEG, PNG, GIF).
-- **PDF Steganography**: Embed and extract data into/from PDF files.
-- **QR Code Steganography**: Embed and extract data into/from QR code images.
-- **Encryption**: Encrypt and decrypt data using the Fernet symmetric encryption.
-- **Compression**: Compress and decompress data using zlib.
-
-## Requirements
-
-- Python 3.x
-- Required Python packages:
-  - `os`
-  - `io`
-  - `zlib`
-  - `base64`
-  - `logging`
-  - `PyPDF2`
-  - `qrcode`
-  - `PIL` (Pillow)
-  - `cryptography`
-  - `pyzbar`
-
-## Installation
-
-1. Clone the repository:
+1. **Clone the repository**:
    ```bash
    git clone https://github.com/elithaxxor/Steganography-Tool.git
-   cd Steganography-Tool
+   ```
 
-Sure! Here is a `MARKDOWN.md` file that includes more usage examples:
-
-```markdown
-# Steganography Tool
-
-This repository provides a steganography tool that allows users to embed and extract data into/from various file formats, including images (JPEG, PNG, GIF), PDFs, and QR codes. The tool also supports encryption and compression of data for enhanced security and efficiency.
-
-## Features
-
-- **Image Steganography**: Embed and extract data into/from image files (JPEG, PNG, GIF).
-- **PDF Steganography**: Embed and extract data into/from PDF files.
-- **QR Code Steganography**: Embed and extract data into/from QR code images.
-- **Encryption**: Encrypt and decrypt data using the Fernet symmetric encryption.
-- **Compression**: Compress and decompress data using zlib.
-
-## Requirements
-
-- Python 3.x
-- Required Python packages:
-  - `os`
-  - `io`
-  - `zlib`
-  - `base64`
-  - `logging`
-  - `PyPDF2`
-  - `qrcode`
-  - `PIL` (Pillow)
-  - `cryptography`
-  - `pyzbar`
-
-## Installation
-
-1. Clone the repository:
+2. **Navigate to the project directory**:
    ```bash
-   git clone https://github.com/elithaxxor/Steganography-Tool.git
    cd Steganography-Tool
    ```
 
-2. Install the required Python packages:
+3. **Install the required dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-## Usage
+## 📚 Dependencies
+
+The tool relies on the following Python packages:
+- `PySimpleGUI` - For the graphical user interface
+- `Pillow` - For image processing
+- `PyPDF2` - For PDF manipulation
+- `qrcode` - For QR code generation
+- `pyzbar` - For QR code reading
+- `cryptography` - For encryption and decryption
+- Standard libraries: `os`, `io`, `zlib`, `base64`, `logging`
+
+## 🚀 Usage
+
+### Getting Started
+
+1. **Launch the application**:
+   ```bash
+   python GUI/main.py
+   ```
+
+2. **The GUI window will open with two main tabs**: `Embed` and `Extract`
+
+### 📥 Embedding Data
+
+1. Select the `Embed` tab
+2. Choose the **File Format** of the carrier file (JPEG, PNG, GIF, PDF, QR)
+3. Browse and select the **Carrier File** in which to hide the data
+4. Browse and select the **Payload File** containing the data to be hidden
+5. Optionally check **Encrypt Data** to encrypt the data before embedding
+6. Optionally check **Compress Data** to compress the data before embedding
+7. Click `Embed Data` to start the embedding process
+8. The application will save the file with the embedded data in your selected output location
+
+### 📤 Extracting Data
+
+1. Select the `Extract` tab
+2. Choose the **File Format** of the carrier file (JPEG, PNG, GIF, PDF, QR)
+3. Browse and select the **Carrier File** from which to extract the data
+4. Specify the **Output Path** where the extracted data will be saved
+5. Check **Encrypted** if the data was encrypted
+6. Check **Compressed** if the data was compressed
+7. Click `Extract Data` to start the extraction process
+8. The extracted data will be saved to your specified output path
+
+## 💻 Code Examples
 
 ### Image Steganography
 
 #### Embed Data into an Image
-
 ```python
 from GUI.EmbedExtract import EmbedExtract
 
@@ -176,7 +112,6 @@ if success:
 ```
 
 #### Extract Data from an Image
-
 ```python
 from GUI.EmbedExtract import EmbedExtract
 
@@ -191,7 +126,6 @@ if extracted_data:
 ### PDF Steganography
 
 #### Embed Data into a PDF
-
 ```python
 from GUI.EmbedExtract import EmbedExtract
 
@@ -204,7 +138,6 @@ if success:
 ```
 
 #### Extract Data from a PDF
-
 ```python
 from GUI.EmbedExtract import EmbedExtract
 
@@ -216,84 +149,65 @@ if extracted_data:
     print("Data extracted:", extracted_data)
 ```
 
-### QR Code Steganography
+## 📸 Screenshots
 
-#### Embed Data into a QR Code
+<p align="center">
+  <img src="screenshots/embed_tab.png" width="48%" alt="Embed Tab">
+  <img src="screenshots/extract_tab.png" width="48%" alt="Extract Tab">
+</p>
 
-```python
-from GUI.EmbedExtract import EmbedExtract
+## 🔍 How It Works
 
-embed_extract = EmbedExtract()
+The Steganography Tool uses different techniques depending on the file format:
 
-# Embed data into a QR code image
-success = embed_extract.embed_qr(b'secret data', 'qrcode.png')
-if success:
-    print("QR code created successfully.")
-```
+- **Images (PNG, JPEG, GIF)**: Uses the least significant bits (LSB) of pixel values to store hidden data
+- **PDF**: Embeds data within PDF metadata or document objects
+- **QR Code**: Generates a QR code that contains the encoded data
 
-#### Extract Data from a QR Code
+When encryption is enabled, the data is encrypted using Fernet symmetric encryption with a secure key before embedding. When compression is enabled, zlib compression is applied to reduce the size of the data.
 
-```python
-from GUI.EmbedExtract import EmbedExtract
+## 🛣️ Roadmap
 
-embed_extract = EmbedExtract()
+Future enhancements planned for the Steganography Tool:
 
-# Extract data from the QR code image
-extracted_data = embed_extract.extract_qr('qrcode.png')
-if extracted_data:
-    print("Data extracted:", extracted_data)
-```
+- **Audio File Support**: Add the ability to hide data in WAV and MP3 files
+- **Video File Support**: Implement steganography techniques for video files
+- **Batch Processing**: Enable processing multiple files at once
+- **Advanced Encryption Options**: Add more encryption algorithms and options
+- **Custom File Headers**: Allow users to create custom file headers for improved stealth
+- **Watermarking**: Add digital watermarking capabilities
 
-### Encryption and Compression
+## 🤝 Contributing
 
-#### Encrypt and Decrypt Data
+Contributions are welcome! If you'd like to improve the Steganography Tool, please follow these steps:
 
-```python
-from GUI.EmbedExtract import Cryptography
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Commit your changes (`git commit -m 'Add some amazing feature'`)
+5. Push to the branch (`git push origin feature/amazing-feature`)
+6. Open a Pull Request
 
-crypto = Cryptography()
+Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for detailed information.
 
-# Encrypt data
-encrypted_data = crypto.encrypt(b'secret data')
-print("Encrypted data:", encrypted_data)
+## 📄 License
 
-# Decrypt data
-decrypted_data = crypto.decrypt(encrypted_data)
-print("Decrypted data:", decrypted_data)
-```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-#### Compress and Decompress Data
+## 🙏 Acknowledgements
 
-```python
-from GUI.EmbedExtract import Compressor
+- [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI) - For the GUI framework
+- [Pillow](https://python-pillow.org/) - For image manipulation
+- [PyPDF2](https://github.com/mstamy2/PyPDF2) - For PDF manipulation
+- [QRCode](https://github.com/lincolnloop/python-qrcode) - For QR code generation
+- [Pyzbar](https://github.com/NaturalHistoryMuseum/pyzbar) - For QR code reading
 
-compressor = Compressor()
+## 📬 Contact
 
-# Compress data
-compressed_data = compressor.compress(b'secret data')
-print("Compressed data:", compressed_data)
+If you have any questions or feedback, feel free to reach out to the project maintainer at [maintainer@example.com](mailto:maintainer@example.com).
 
-# Decompress data
-decompressed_data = compressor.decompress(compressed_data)
-print("Decompressed data:", decompressed_data)
-```
+---
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Author
-
-Created by [elithaxxor](https://github.com/elithaxxor).
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request with your changes.
-
-## Contact
-
-For any inquiries, please contact [elithaxxor](https://github.com/elithaxxor).
-
-```
-
-Feel free to add this `MARKDOWN.md` file to your repository.
+<p align="center">
+  Made with ❤️ by <a href="https://github.com/elithaxxor">elithaxxor</a>
+</p>
