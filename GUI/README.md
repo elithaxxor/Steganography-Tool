@@ -1,16 +1,16 @@
 # 🔒 Steganography Tool+Detector v2.1
-### added 'batch mode' for multiple processes <3
+####### Batchmode + Steg Detectoctor added in v2.0
 
 <div align="center">
-
-![logo](https://github.com/user-attachments/assets/0ce49915-1a67-45da-a471-c54f789744d6)
-
 ⚠️ Disclaimer
 
 This tool is intended for security professionals to perform authorized security assessments only. Unauthorized scanning of networks may violate local, state, and federal laws. The author is not responsible for misuse or damage caused by this tool.
 
 @copyleft my mistakes yours. feel free to incorporate it into your work. however, I'm not responsible for your actions. do not be unethical. do not harm others. do the right thing.
 </div>
+
+![logo](https://github.com/user-attachments/assets/0ce49915-1a67-45da-a471-c54f789744d6)
+
 
 <div align="center">
 
