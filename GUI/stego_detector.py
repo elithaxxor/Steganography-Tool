@@ -442,7 +442,7 @@ class StegoDetector:
         
         else:
             # Unsupported file type
-            return 0, {'error': f'Unsupported file type: {file_ext}'}, 'Unknown'
+            return 0, {'error': f'Unsupported file type: {file_ext}'}, 'Unknown', 'Unknown'
         
         # Interpretation of the probability
         if probability < 0.3:
