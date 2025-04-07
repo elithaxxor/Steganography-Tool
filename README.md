@@ -495,7 +495,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **[Request Feature](https://github.com/elithaxxor/Steganography-Tool/issues)**
 
 <p align="center">
-⭐ Star this repo if you found it useful! ⭐
+⚠️ Disclaimer
+
+This tool is intended for security professionals to perform authorized security assessments only. Unauthorized scanning of networks may violate local, state, and federal laws. The author is not responsible for misuse or damage caused by this tool.
+
+@copyleft my mistakes yours. feel free to incorporate it into your work. however, I'm not responsible for your actions. do not be unethical. do not harm others. do the right thing.
 </p>
 
 </div>
