@@ -5,6 +5,8 @@ import zlib
 import base64
 import logging
 import PyPDF2
+import wave
+import numpy as np 
 import qrcode
 from PIL import Image
 from cryptography.fernet import Fernet
@@ -325,4 +327,274 @@ class EmbedExtract:
         
         except Exception as e:
             logging.exception(f'Error extracting data from QR code: {str(e)}')
+            return None
+
+    def embed_audio(self, carrier_path, data):
+    """Embed binary data into a WAV audio file."""
+        try:
+            # Open the audio file
+            with wave.open(carrier_path, 'rb') as wav:
+                # Get the audio parameters
+                params = wav.getparams()
+                n_frames = wav.getnframes()
+                
+                # Read the audio frames
+                frames = wav.readframes(n_frames)
+                audio_data = np.frombuffer(frames, dtype=np.int16)
+                
+                # Convert data to bytes if it's not already
+                if isinstance(data, str):
+                    data = data.encode()
+                
+                # Create a binary representation of the data length
+                data_len = len(data).to_bytes(4, byteorder='big')
+                
+                # Combine length and data
+                complete_data = data_len + data
+                
+                # Check if the audio can hold the data (each audio sample can hold 1 bit)
+                if len(complete_data) * 8 > len(audio_data):
+                    logging.error('Data too large for carrier audio')
+                    return False
+                
+                # Embed the data into the audio
+                data_bits = []
+                for byte in complete_data:
+                    # Convert each byte to bits
+                    for i in range(8):
+                        bit = (byte >> i) & 1
+                        data_bits.append(bit)
+                
+                # Modify the least significant bit of each audio sample
+                for i in range(len(data_bits)):
+                    audio_data[i] = (audio_data[i] & ~1) | data_bits[i]
+                
+                # Create a new audio file with the modified data
+                output_path = os.path.splitext(carrier_path)[0] + "_embedded.wav"
+                with wave.open(output_path, 'wb') as out_wav:
+                    out_wav.setparams(params)
+                    out_wav.writeframes(audio_data.tobytes())
+                
+                logging.info(f'Data embedded successfully into {output_path}')
+                return True
+            
+        except Exception as e:
+            logging.exception(f'Error embedding data in audio: {str(e)}')
+            return False
+
+    def extract_audio(self, carrier_path):
+        """Extract binary data from a WAV audio file."""
+        try:
+            import wave
+            import numpy as np
+            
+            # Open the audio file
+            with wave.open(carrier_path, 'rb') as wav:
+                # Get the audio parameters
+                n_frames = wav.getnframes()
+                
+                # Read the audio frames
+                frames = wav.readframes(n_frames)
+                audio_data = np.frombuffer(frames, dtype=np.int16)
+                
+                # Extract the data length (first 32 bits)
+                data_len_bits = [audio_data[i] & 1 for i in range(32)]
+                
+                # Convert bits to bytes
+                data_len_bytes = bytearray(4)
+                for i in range(32):
+                    byte_index = i // 8
+                    bit_index = i % 8
+                    if data_len_bits[i]:
+                        data_len_bytes[byte_index] |= (1 << bit_index)
+                
+                # Convert the bytes to an integer
+                data_len = int.from_bytes(data_len_bytes, byteorder='big')
+                
+                # Extract the actual data
+                data_bits = [audio_data[i + 32] & 1 for i in range(data_len * 8)]
+                
+                # Convert bits to bytes
+                data_bytes = bytearray(data_len)
+                for i in range(data_len * 8):
+                    byte_index = i // 8
+                    bit_index = i % 8
+                    if data_bits[i]:
+                        data_bytes[byte_index] |= (1 << bit_index)
+                
+                logging.info(f'Data extracted successfully from {carrier_path}')
+                return bytes(data_bytes)
+            
+        except Exception as e:
+            logging.exception(f'Error extracting data from audio: {str(e)}')
+            return None
+
+    def embed_video(self, carrier_path, data):
+        """Embed binary data into a video file."""
+        try:
+            import cv2
+            import numpy as np
+            
+            # Open the video file
+            video = cv2.VideoCapture(carrier_path)
+            
+            # Get video properties
+            width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+            height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+            fps = video.get(cv2.CAP_PROP_FPS)
+            total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+            
+            # Convert data to bytes if it's not already
+            if isinstance(data, str):
+                data = data.encode()
+            
+            # Create a binary representation of the data length
+            data_len = len(data).to_bytes(4, byteorder='big')
+            
+            # Combine length and data
+            complete_data = data_len + data
+            
+            # Calculate total bits to embed
+            total_bits = len(complete_data) * 8
+            
+            # Calculate bits per frame (assuming we can use 1 LSB per pixel)
+            bits_per_frame = width * height
+            
+            # Check if video can hold the data
+            if total_bits > (bits_per_frame * total_frames):
+                logging.error('Data too large for carrier video')
+                return False
+            
+            # Create output video file
+            output_path = os.path.splitext(carrier_path)[0] + "_embedded.mp4"
+            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+            out_video = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
+            
+            # Convert complete_data to a bit array
+            bit_array = []
+            for byte in complete_data:
+                for i in range(8):
+                    bit_array.append((byte >> i) & 1)
+            
+            # Keep track of current bit position
+            bit_pos = 0
+            
+            # Embed data frame by frame
+            while(video.isOpened() and bit_pos < total_bits):
+                ret, frame = video.read()
+                if not ret:
+                    break
+                
+                # Flatten the frame for easier processing
+                flat_frame = frame.reshape(-1)
+                
+                # Calculate how many bits we can embed in this frame
+                bits_to_embed = min(bits_per_frame, total_bits - bit_pos)
+                
+                # Embed bits in this frame
+                for i in range(bits_to_embed):
+                    flat_frame[i] = (flat_frame[i] & ~1) | bit_array[bit_pos]
+                    bit_pos += 1
+                
+                # Reshape the frame back to its original dimensions
+                mod_frame = flat_frame.reshape(frame.shape)
+                
+                # Write the modified frame to the output video
+                out_video.write(mod_frame.astype(np.uint8))
+            
+            # Copy the remaining frames as is
+            while(video.isOpened()):
+                ret, frame = video.read()
+                if not ret:
+                    break
+                out_video.write(frame)
+            
+            # Release the video objects
+            video.release()
+            out_video.release()
+            
+            logging.info(f'Data embedded successfully into {output_path}')
+            return True
+            
+        except Exception as e:
+            logging.exception(f'Error embedding data in video: {str(e)}')
+            return False
+
+    def extract_video(self, carrier_path):
+    """Extract binary data from a video file."""
+        try:
+            import cv2
+            import numpy as np
+            
+            # Open the video file
+            video = cv2.VideoCapture(carrier_path)
+            
+            # Get video properties
+            width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+            height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+            
+            # Bits per frame
+            bits_per_frame = width * height
+            
+            # Read the first frame to get the data length
+            ret, frame = video.read()
+            if not ret:
+                logging.error('Could not read video')
+                return None
+            
+            # Flatten the frame
+            flat_frame = frame.reshape(-1)
+            
+            # Extract the first 32 bits to get the data length
+            data_len_bits = [flat_frame[i] & 1 for i in range(32)]
+            
+            # Convert bits to bytes
+            data_len_bytes = bytearray(4)
+            for i in range(32):
+                byte_index = i // 8
+                bit_index = i % 8
+                if data_len_bits[i]:
+                    data_len_bytes[byte_index] |= (1 << bit_index)
+            
+            # Convert the bytes to an integer
+            data_len = int.from_bytes(data_len_bytes, byteorder='big')
+            
+            # Calculate total bits to extract
+            total_bits = data_len * 8 + 32  # Including the 32 bits for length
+            
+            # Create a bit array to store all extracted bits
+            bit_array = data_len_bits
+            
+            # Continue extracting frames until we have all the data
+            remaining_bits = total_bits - 32
+            bits_extracted_from_first_frame = min(bits_per_frame - 32, remaining_bits)
+            bit_array.extend([flat_frame[i + 32] & 1 for i in range(bits_extracted_from_first_frame)])
+            remaining_bits -= bits_extracted_from_first_frame
+            
+            # Extract data from remaining frames
+            while remaining_bits > 0 and video.isOpened():
+                ret, frame = video.read()
+                if not ret:
+                    break
+                
+                flat_frame = frame.reshape(-1)
+                bits_to_extract = min(bits_per_frame, remaining_bits)
+                bit_array.extend([flat_frame[i] & 1 for i in range(bits_to_extract)])
+                remaining_bits -= bits_to_extract
+            
+            # Convert bit array to bytes (skipping the first 32 bits which were the length)
+            data_bytes = bytearray(data_len)
+            for i in range(data_len * 8):
+                byte_index = i // 8
+                bit_index = i % 8
+                if bit_array[i + 32]:  # Skip the first 32 bits (length)
+                    data_bytes[byte_index] |= (1 << bit_index)
+            
+            video.release()
+            
+            logging.info(f'Data extracted successfully from {carrier_path}')
+            return bytes(data_bytes)
+            
+        except Exception as e:
+            logging.exception(f'Error extracting data from video: {str(e)}')
             return None
