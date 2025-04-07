@@ -9,7 +9,6 @@ This tool is intended for security professionals to perform authorized security 
 @copyleft my mistakes yours. feel free to incorporate it into your work. however, I'm not responsible for your actions. do not be unethical. do not harm others. do the right thing.
 </div>
 
-![logo](https://github.com/user-attachments/assets/0ce49915-1a67-45da-a471-c54f789744d6)
 
 
 <div align="center">
@@ -20,6 +19,7 @@ This tool is intended for security professionals to perform authorized security 
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Cross_Platform-purple?style=for-the-badge)](https://github.com/elithaxxor/Steganography-Tool)
 [![GUI](https://img.shields.io/badge/GUI-Tkinter-orange?style=for-the-badge)](https://docs.python.org/3/library/tkinter.html)
+![logo](https://github.com/user-attachments/assets/0ce49915-1a67-45da-a471-c54f789744d6)
 
 **Hide secrets in plain sight with advanced steganography techniques**
 
