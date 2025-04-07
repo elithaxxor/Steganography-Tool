@@ -195,7 +195,6 @@ def handle_extract(embed_extract, crypto, compressor, values):
         sg.popup_error(f'Error: {str(e)}')
         logging.exception('Exception in data extraction')
 
-
 def main():
     """Main function to setup and run the GUI application."""
     setup_logging()
