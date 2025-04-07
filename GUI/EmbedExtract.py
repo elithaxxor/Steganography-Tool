@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-import os
-import io
+import os, io, sys, logging
 import zlib
 import base64
-import logging
 import PyPDF2
 import wave
+import cv2
 import numpy as np 
 import qrcode
 from PIL import Image
@@ -521,11 +520,10 @@ class EmbedExtract:
             return False
 
     def extract_video(self, carrier_path):
-    """Extract binary data from a video file."""
+        
+        """Extract binary data from a video file."""
         try:
-            import cv2
-            import numpy as np
-            
+
             # Open the video file
             video = cv2.VideoCapture(carrier_path)
             
