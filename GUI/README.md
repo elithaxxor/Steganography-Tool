@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.6+-green.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-orange.svg)
+![Version](https://img.shields.io/badge/version-1.1.0-orange.svg)
 ![Stars](https://img.shields.io/github/stars/elithaxxor/Steganography-Tool?style=social)
 
 <p align="center">
@@ -19,13 +19,48 @@ The Steganography Tool provides a powerful yet user-friendly graphical interface
 
 ## ✨ Features
 
-- **📊 Multiple File Format Support**: Hide data within JPEG, PNG, GIF images, PDF files, or generate a QR code with the hidden data
+- **📊 Multiple File Format Support**: Hide data within JPEG, PNG, GIF images, PDF files, WAV audio files, MP4 video files, or generate a QR code with the hidden data
 - **🔍 Data Extraction**: Seamlessly retrieve hidden data from supported file formats
 - **🔐 Strong Encryption**: Optionally encrypt data before embedding using Fernet symmetric encryption for enhanced security
 - **📦 Data Compression**: Reduce the size of embedded data using zlib compression
 - **🖥️ Intuitive GUI**: Easy-to-use interface built with PySimpleGUI for improved user experience
 - **📝 Comprehensive Logging**: Detailed logging of operations for debugging and audit purposes
 - **⚙️ Cross-Platform**: Works on Windows, macOS, and Linux
+
+## 🔬 How LSB Steganography Works
+
+Least Significant Bit (LSB) steganography is the primary technique used in this tool for embedding data in images, audio, and video files. Here's how it works:
+
+### Basic Principle
+
+Digital media files (images, audio, video) store data as a sequence of bytes. Each byte consists of 8 bits. In LSB steganography, we replace the least significant bit (the rightmost bit) of each byte with a bit from our secret data. Since this bit has the smallest impact on the value, changing it creates only a minimal, often imperceptible change to the original file.
+
+### For Different Media Types:
+
+1. **Images**: Each pixel in an image is represented by color values (RGB or grayscale). We modify the least significant bit of these color values to store our hidden data. For example, in an RGB image, each pixel has three color values, giving us three bits per pixel that can be modified.
+
+2. **Audio**: Audio files consist of samples that represent the amplitude of sound waves at specific time intervals. We modify the least significant bit of each sample to embed our data. Due to the limitations of human hearing, these small changes are typically inaudible.
+
+3. **Video**: Video files are essentially sequences of images (frames) with associated audio. We can apply the same LSB technique to either the video frames, the audio track, or both.
+
+### The Process:
+
+1. **Embedding**:
+   - Convert the secret data into a bit stream
+   - For each bit of secret data, replace the LSB of a byte in the carrier file
+   - The first few bytes are typically used to store the length of the hidden data
+
+2. **Extraction**:
+   - Read the LSBs from the carrier file
+   - The first few bits indicate the length of the hidden message
+   - Continue extracting LSBs until the complete message is retrieved
+
+### Advantages:
+
+- Minimal visual/auditory impact on the carrier file
+- Relatively simple to implement
+- Difficult to detect without special analysis tools
+- Large capacity compared to other steganography methods
 
 ## 🛠️ Installation
 
@@ -60,6 +95,9 @@ The tool relies on the following Python packages:
 - `qrcode` - For QR code generation
 - `pyzbar` - For QR code reading
 - `cryptography` - For encryption and decryption
+- `numpy` - For numerical operations
+- `opencv-python` - For video processing
+- `wave` - For audio file processing
 - Standard libraries: `os`, `io`, `zlib`, `base64`, `logging`
 
 ## 🚀 Usage
@@ -76,7 +114,7 @@ The tool relies on the following Python packages:
 ### 📥 Embedding Data
 
 1. Select the `Embed` tab
-2. Choose the **File Format** of the carrier file (JPEG, PNG, GIF, PDF, QR)
+2. Choose the **File Format** of the carrier file (JPEG, PNG, GIF, PDF, QR, WAV, MP4)
 3. Browse and select the **Carrier File** in which to hide the data
 4. Browse and select the **Payload File** containing the data to be hidden
 5. Optionally check **Encrypt Data** to encrypt the data before embedding
@@ -87,7 +125,7 @@ The tool relies on the following Python packages:
 ### 📤 Extracting Data
 
 1. Select the `Extract` tab
-2. Choose the **File Format** of the carrier file (JPEG, PNG, GIF, PDF, QR)
+2. Choose the **File Format** of the carrier file (JPEG, PNG, GIF, PDF, QR, WAV, MP4)
 3. Browse and select the **Carrier File** from which to extract the data
 4. Specify the **Output Path** where the extracted data will be saved
 5. Check **Encrypted** if the data was encrypted
@@ -123,28 +161,54 @@ if extracted_data:
     print("Data extracted:", extracted_data)
 ```
 
-### PDF Steganography
+### Audio Steganography
 
-#### Embed Data into a PDF
+#### Embed Data into an Audio File
 ```python
 from GUI.EmbedExtract import EmbedExtract
 
 embed_extract = EmbedExtract()
 
-# Embed data into a PDF file
-success = embed_extract.embed_pdf('document.pdf', b'secret data')
+# Embed data into a WAV file
+success = embed_extract.embed_audio('audio.wav', b'secret data')
 if success:
     print("Data embedded successfully.")
 ```
 
-#### Extract Data from a PDF
+#### Extract Data from an Audio File
 ```python
 from GUI.EmbedExtract import EmbedExtract
 
 embed_extract = EmbedExtract()
 
-# Extract data from the embedded PDF file
-extracted_data = embed_extract.extract_pdf('document_embedded.pdf')
+# Extract data from the embedded WAV file
+extracted_data = embed_extract.extract_audio('audio_embedded.wav')
+if extracted_data:
+    print("Data extracted:", extracted_data)
+```
+
+### Video Steganography
+
+#### Embed Data into a Video File
+```python
+from GUI.EmbedExtract import EmbedExtract
+
+embed_extract = EmbedExtract()
+
+# Embed data into an MP4 file
+success = embed_extract.embed_video('video.mp4', b'secret data')
+if success:
+    print("Data embedded successfully.")
+```
+
+#### Extract Data from a Video File
+```python
+from GUI.EmbedExtract import EmbedExtract
+
+embed_extract = EmbedExtract()
+
+# Extract data from the embedded MP4 file
+extracted_data = embed_extract.extract_video('video_embedded.mp4')
 if extracted_data:
     print("Data extracted:", extracted_data)
 ```
@@ -156,26 +220,19 @@ if extracted_data:
   <img src="screenshots/extract_tab.png" width="48%" alt="Extract Tab">
 </p>
 
-## 🔍 How It Works
-
-The Steganography Tool uses different techniques depending on the file format:
-
-- **Images (PNG, JPEG, GIF)**: Uses the least significant bits (LSB) of pixel values to store hidden data
-- **PDF**: Embeds data within PDF metadata or document objects
-- **QR Code**: Generates a QR code that contains the encoded data
-
-When encryption is enabled, the data is encrypted using Fernet symmetric encryption with a secure key before embedding. When compression is enabled, zlib compression is applied to reduce the size of the data.
-
 ## 🛣️ Roadmap
 
 Future enhancements planned for the Steganography Tool:
 
-- **Audio File Support**: Add the ability to hide data in WAV and MP3 files
-- **Video File Support**: Implement steganography techniques for video files
-- **Batch Processing**: Enable processing multiple files at once
+- **Enhanced Audio Support**: Add support for MP3 and other audio formats
+- **Advanced Video Options**: Configure which frames to use for embedding
+- **Multiple Carrier Support**: Split large payloads across multiple carrier files
 - **Advanced Encryption Options**: Add more encryption algorithms and options
+- **Batch Processing**: Enable processing multiple files at once
 - **Custom File Headers**: Allow users to create custom file headers for improved stealth
 - **Watermarking**: Add digital watermarking capabilities
+- **Steganography Detection**: Add capability to detect if a file contains hidden data
+- **Password Protection**: Add password protection for encrypted data
 
 ## 🤝 Contributing
 
@@ -201,6 +258,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [PyPDF2](https://github.com/mstamy2/PyPDF2) - For PDF manipulation
 - [QRCode](https://github.com/lincolnloop/python-qrcode) - For QR code generation
 - [Pyzbar](https://github.com/NaturalHistoryMuseum/pyzbar) - For QR code reading
+- [OpenCV](https://opencv.org/) - For video processing
+- [NumPy](https://numpy.org/) - For numerical operations
 
 ## 📬 Contact
 
