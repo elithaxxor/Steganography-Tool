@@ -1,4 +1,5 @@
 # 🔒 Steganography Tool+Detector v2.1
+### added 'batch mode' for multiple processes <3
 
 <div align="center">
 
