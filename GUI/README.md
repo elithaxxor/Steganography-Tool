@@ -1,4 +1,4 @@
-# 🔒 Steganography Tool+Detector v2.0 
+# 🔒 Steganography Tool+Detector v2.1
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.6+-green.svg)
@@ -373,11 +373,12 @@ Future enhancements planned for the Steganography Tool:
 - **Advanced Video Options**: Configure which frames to use for embedding
 - **Multiple Carrier Support**: Split large payloads across multiple carrier files
 - **Advanced Encryption Options**: Add more encryption algorithms and options
-- **Batch Processing**: Enable processing multiple files at once
 - **Custom File Headers**: Allow users to create custom file headers for improved stealth
 - **Watermarking**: Add digital watermarking capabilities
-- **Steganography Detection**: Add capability to detect if a file contains hidden data
+- **Advanced Detection Methods**: Implement machine learning-based detection
 - **Password Protection**: Add password protection for encrypted data
+- **Network Steganography**: Add protocols for hiding data in network traffic
+- **Cloud Integration**: Add capability to embed/extract from cloud storage providers
 
 ## 🤝 Contributing
 
