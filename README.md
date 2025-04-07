@@ -1,418 +1,501 @@
 # 🔒 Steganography Tool v2.0 (GUI) 
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python](https://img.shields.io/badge/python-3.6+-green.svg)
-![Version](https://img.shields.io/badge/version-1.1.0-orange.svg)
-![Stars](https://img.shields.io/github/stars/elithaxxor/Steganography-Tool?style=social)
+<div align="center">
+
+![Steganography Tool Banner](https://via.placeholder.com/1200x300/0d1117/38b0de?text=Steganography+Tool)
+
+[![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Cross_Platform-purple?style=for-the-badge)](https://github.com/elithaxxor/Steganography-Tool)
+[![Stars](https://img.shields.io/github/stars/elithaxxor/Steganography-Tool?style=for-the-badge&logo=github)](https://github.com/elithaxxor/Steganography-Tool)
+
+**Conceal secrets in plain sight with advanced steganography techniques**
+
+</div>
 
 <p align="center">
-  <img src="https://i.imgur.com/P4oGIBv.png" width="200" alt="Steganography Logo">
+This powerful steganography suite enables you to hide sensitive information within innocent-looking image files. Whether you're concerned about privacy, engaged in secure communications, or simply fascinated by cryptographic science, this tool provides the perfect balance of security and usability.
 </p>
 
-<p align="center">
-  <b>Hide data in plain sight with advanced steganography techniques</b>
-</p>
+---
 
-## 📖 Overview
+## 📋 Table of Contents
 
-The Steganography Tool provides a powerful yet user-friendly graphical interface for embedding and extracting data within various file formats using advanced steganography techniques. This tool enables you to hide sensitive information within ordinary-looking files, making it invisible to casual observers. With additional features like encryption and compression, your hidden data remains secure and efficient.
+- [✨ Features](#-features)
+- [🖼️ Screenshots](#-screenshots)
+- [🎯 Why Use Steganography?](#-why-use-steganography)
+- [🧩 Requirements](#-requirements)
+- [⚙️ Installation](#️-installation)
+- [🚀 Quick Start](#-quick-start)
+- [📱 Usage Guide](#-usage-guide)
+- [🔒 Security Details](#-security-details)
+- [🔧 Supported Formats](#-supported-formats)
+- [🔍 How It Works](#-how-it-works)
+- [🛠️ Troubleshooting](#️-troubleshooting)
+- [🤝 Contributing](#-contributing)
+- [📜 License](#-license)
+- [👤 Author](#-author)
+
+---
 
 ## ✨ Features
 
-- **📊 Multiple File Format Support**: Hide data within JPEG, PNG, GIF images, PDF files, WAV audio files, MP4 video files, or generate a QR code with the hidden data
-- **🔍 Data Extraction**: Seamlessly retrieve hidden data from supported file formats
-- **🔐 Strong Encryption**: Optionally encrypt data before embedding using Fernet symmetric encryption for enhanced security
-- **📦 Data Compression**: Reduce the size of embedded data using zlib compression
-- **🕵️‍♂️ Steganography Detection**: Analyze files to detect if they contain hidden data using statistical analysis
-- **📊 Batch Processing**: Process multiple files at once for efficient operations
-- **📈 Progress Tracking**: Visual progress bars keep you informed during time-consuming operations
-- **🖥️ Intuitive GUI**: Easy-to-use interface built with PySimpleGUI for improved user experience
-- **📝 Comprehensive Logging**: Detailed logging of operations for debugging and audit purposes
-- **⚙️ Cross-Platform**: Works on Windows, macOS, and Linux
+<div align="center">
 
-## 🔬 How LSB Steganography Works
-
-Least Significant Bit (LSB) steganography is the primary technique used in this tool for embedding data in images, audio, and video files. Here's how it works:
-
-### Basic Principle
-
-Digital media files (images, audio, video) store data as a sequence of bytes. Each byte consists of 8 bits. In LSB steganography, we replace the least significant bit (the rightmost bit) of each byte with a bit from our secret data. Since this bit has the smallest impact on the value, changing it creates only a minimal, often imperceptible change to the original file.
-
-### For Different Media Types:
-
-1. **Images**: Each pixel in an image is represented by color values (RGB or grayscale). We modify the least significant bit of these color values to store our hidden data. For example, in an RGB image, each pixel has three color values, giving us three bits per pixel that can be modified.
-
-2. **Audio**: Audio files consist of samples that represent the amplitude of sound waves at specific time intervals. We modify the least significant bit of each sample to embed our data. Due to the limitations of human hearing, these small changes are typically inaudible.
-
-3. **Video**: Video files are essentially sequences of images (frames) with associated audio. We can apply the same LSB technique to either the video frames, the audio track, or both.
-
-### The Process:
-
-1. **Embedding**:
-   - Convert the secret data into a bit stream
-   - For each bit of secret data, replace the LSB of a byte in the carrier file
-   - The first few bytes are typically used to store the length of the hidden data
-
-2. **Extraction**:
-   - Read the LSBs from the carrier file
-   - The first few bits indicate the length of the hidden message
-   - Continue extracting LSBs until the complete message is retrieved
-
-### Advantages:
-
-- Minimal visual/auditory impact on the carrier file
-- Relatively simple to implement
-- Difficult to detect without special analysis tools
-- Large capacity compared to other steganography methods
-
-## 🛠️ Installation
-
-### Prerequisites
-
-- Python 3.6 or higher
-- Git (for cloning the repository)
-
-### Steps
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/elithaxxor/Steganography-Tool.git
-   ```
-
-2. **Navigate to the project directory**:
-   ```bash
-   cd Steganography-Tool
-   ```
-
-3. **Install the required dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## 📚 Dependencies
-
-The tool relies on the following Python packages:
-- `PySimpleGUI` - For the graphical user interface
-- `Pillow` - For image processing
-- `PyPDF2` - For PDF manipulation
-- `qrcode` - For QR code generation
-- `pyzbar` - For QR code reading
-- `cryptography` - For encryption and decryption
-- `numpy` - For numerical operations
-- `opencv-python` - For video processing
-- `wave` - For audio file processing
-- Standard libraries: `os`, `io`, `zlib`, `base64`, `logging`
-
-## 🕵️‍♂️ Steganography Detection
-
-The Steganography Tool includes advanced detection capabilities to analyze files and determine if they contain hidden data. The detection system uses several statistical analysis techniques:
-
-### Detection Methods
-
-1. **LSB Distribution Analysis**: Examines the distribution of least significant bits in the file. In natural files, LSBs should be randomly distributed (approximately 50% 0s and 50% 1s). Steganography often alters this distribution.
-
-2. **Color Channel Correlation**: In natural images and videos, there is usually some correlation between color channels. Steganography tends to reduce this correlation.
-
-3. **Sample Pair Analysis**: Analyzes patterns in adjacent samples (pixels, audio samples) to detect unnatural distortions caused by data hiding.
-
-4. **Spectral Analysis**: For audio files, examines the frequency spectrum for discontinuities that might indicate hidden data.
-
-5. **PDF Metadata Analysis**: Checks PDF files for suspicious metadata fields or embedded objects that might contain hidden data.
-
-### Interpretation of Results
-
-The detector provides a probability score between 0 and 1:
-
-- **0.0 - 0.3**: Low probability of hidden data
-- **0.3 - 0.7**: Medium probability of hidden data
-- **0.7 - 1.0**: High probability of hidden data
-
-The detection system also provides detailed analysis information to help understand why a certain probability was assigned.
-
-### Limitations
-
-- Detection is probabilistic, not deterministic - false positives and false negatives are possible
-- Very small amounts of hidden data may not be detected
-- Sophisticated steganography techniques designed to evade detection may not be caught
-- Detection effectiveness varies by file type and steganography method
-
-## 🚀 Usage
-
-### Getting Started
-
-1. **Launch the application**:
-   ```bash
-   python GUI/main.py
-   ```
-
-2. **The GUI window will open with two main tabs**: `Embed` and `Extract`
-
- embedding
-6. Optionally check **Compress Data** to compress the data before embedding
-7. Click `Embed Data` to start the embedding process
-8. The application will save the file with the embedded data in your selected output location
-
-### 📤 Extracting Data
-
-1. Select the `Extract` tab
-2. Choose the **File Format** of the carrier file (JPEG, PNG, GIF, PDF, QR, WAV, MP4)
-3. Select either **Single File** or **Batch Processing** mode
-4. For single files:
-   - Browse and select the **Carrier File** from which to extract the data
-   - Specify the **Output Path** where the extracted data will be saved
-5. For batch processing:
-   - Browse and select the **Carrier Directory** containing files to process
-   - Specify the **Output Directory** where extracted data will be saved
-6. Check **Encrypted** if the data was encrypted
-7. Check **Compressed** if the data was compressed
-8. Click `Extract Data` to start the extraction process
-9. The progress bar will display the current operation status
-
-### 🕵️‍♂️ Detecting Steganography
-
-1. Select the `Detect` tab
-2. Browse and select the **File to Analyze**
-3. Click `Detect Steganography` to start the analysis
-4. The tool will analyze the file and display:
-   - An overall probability that the file contains hidden data
-   - An interpretation of the result (Low, Medium, or High probability)
-   - Detailed analysis metrics in the details area
-
-## 💻 Code Examples
-
-### Image Steganography
-
-#### Embed Data into an Image
-```python
-from GUI.EmbedExtract import EmbedExtract
-
-embed_extract = EmbedExtract()
-
-# Embed data into a PNG image
-success = embed_extract.embed_binary('image.png', b'secret data', 'png')
-if success:
-    print("Data embedded successfully.")
+```mermaid
+mindmap
+  root((Steganography Tool))
+    Data Concealment
+      🖼️ Image-based hiding
+      📝 Text embedding
+      🔐 Password protection
+    Security Layers
+      🔑 AES encryption
+      🧩 LSB technique
+      🔄 Distribution patterns
+    Experience
+      🖱️ Simple interface
+      📊 Capacity calculator
+      🔍 Preview capabilities
+    Compatibility
+      🖥️ Cross-platform
+      🗃️ Multiple formats
+      🔌 Extensible design
 ```
 
-#### Extract Data from an Image
-```python
-from GUI.EmbedExtract import EmbedExtract
+</div>
 
-embed_extract = EmbedExtract()
+- **🔍 Multiple Hiding Techniques**: LSB (Least Significant Bit), DCT (Discrete Cosine Transform)
+- **🔐 Strong Encryption**: AES-256 encryption to protect your hidden data
+- **🖼️ Format Support**: Works with PNG, BMP, and JPEG images
+- **📊 Capacity Analysis**: Calculate how much data can be hidden in an image
+- **📂 File Embedding**: Hide any file type within compatible images
+- **🔄 Batch Processing**: Process multiple files simultaneously
+- **🖥️ Cross-Platform**: Compatible with Windows, macOS, and Linux
+- **📱 Intuitive Interface**: User-friendly design for all experience levels
+- **🔍 Minimal Footprint**: Changes to carrier images are virtually undetectable
+- **🔒 Data Protection**: Multi-layered security for your sensitive information
 
-# Extract data from the embedded PNG image
-extracted_data = embed_extract.extract_binary('image_embedded.png', 'png')
-if extracted_data:
-    print("Data extracted:", extracted_data)
+---
+
+## 🖼️ Screenshots
+
+<div align="center">
+  <p><strong>Main Application Interface</strong></p>
+  <img src="https://via.placeholder.com/800x450/0d1117/38b0de?text=Main+Interface" alt="Main Interface" width="80%">
+  
+  <p><strong>Embedding Process</strong></p>
+  <img src="https://via.placeholder.com/800x450/0d1117/38b0de?text=Data+Embedding+Screen" alt="Embedding Process" width="80%">
+  
+  <p><strong>Extraction Complete</strong></p>
+  <img src="https://via.placeholder.com/800x450/0d1117/38b0de?text=Data+Extraction+Complete" alt="Extraction Process" width="80%">
+</div>
+
+---
+
+## 🎯 Why Use Steganography?
+
+Steganography offers unique security advantages that complement traditional encryption:
+
+<div align="center">
+
+| 🔒 Encryption Alone | 🔐 Steganography + Encryption |
+|---------------------|-------------------------------|
+| Makes data unreadable | Makes data invisible AND unreadable |
+| Signals the presence of secrets | Provides plausible deniability |
+| Single layer of protection | Multiple security layers |
+| Vulnerable to forced disclosure | Hidden data can't be forced to disclose if unknown |
+
+</div>
+
+> 💡 **"The best security is when nobody knows you have something to hide in the first place."**
+
+By hiding information within ordinary files, steganography provides an additional layer of security that can be essential for:
+
+- ✅ Protecting intellectual property
+- ✅ Secure communications
+- ✅ Privacy preservation
+- ✅ Digital watermarking
+- ✅ Confidential data storage
+
+---
+
+## 🧩 Requirements
+
+- **Python 3.6+**
+- **Operating System**: Windows 7/10/11, macOS 10.13+, or Linux
+- **Disk Space**: ~150MB (including dependencies)
+- **Python Libraries**:
+  - PIL/Pillow (for image processing)
+  - NumPy (for numerical operations)
+  - Cryptography (for encryption/decryption)
+  - TKinter (for GUI version)
+
+---
+
+## ⚙️ Installation
+
+### Option 1: Using Git (Recommended)
+
+```bash
+# Clone the repository
+git clone https://github.com/elithaxxor/Steganography-Tool.git
+
+# Navigate to the directory
+cd Steganography-Tool
+
+# Install dependencies
+pip install -r requirements.txt
 ```
 
-### Audio Steganography
+### Option 2: Download ZIP
 
-#### Embed Data into an Audio File
-```python
-from GUI.EmbedExtract import EmbedExtract
+1. Visit [https://github.com/elithaxxor/Steganography-Tool](https://github.com/elithaxxor/Steganography-Tool)
+2. Click the "Code" button and select "Download ZIP"
+3. Extract the ZIP file to your preferred location
+4. Open a terminal/command prompt in the extracted directory
+5. Run `pip install -r requirements.txt`
 
-embed_extract = EmbedExtract()
+<details>
+<summary>📋 View dependencies (requirements.txt)</summary>
 
-# Embed data into a WAV file
-success = embed_extract.embed_audio('audio.wav', b'secret data')
-if success:
-    print("Data embedded successfully.")
+```
+pillow>=8.2.0
+numpy>=1.19.5
+cryptography>=3.4.7
+tqdm>=4.61.1
+pypng>=0.0.20
+```
+</details>
+
+---
+
+## 🚀 Quick Start
+
+### Hide Data in an Image
+
+```bash
+# Command Line Version
+python stego.py embed -i original_image.png -o steganographic_image.png -m "Your secret message" -p "YourPassword"
+
+# Or use the GUI version
+python stego_gui.py
 ```
 
-#### Extract Data from an Audio File
-```python
-from GUI.EmbedExtract import EmbedExtract
+### Extract Hidden Data
 
-embed_extract = EmbedExtract()
+```bash
+# Command Line Version
+python stego.py extract -i steganographic_image.png -p "YourPassword"
 
-# Extract data from the embedded WAV file
-extracted_data = embed_extract.extract_audio('audio_embedded.wav')
-if extracted_data:
-    print("Data extracted:", extracted_data)
+# Or use the GUI version and select "Extract" mode
+python stego_gui.py
 ```
 
-### Video Steganography
+---
 
-#### Embed Data into a Video File
-```python
-from GUI.EmbedExtract import EmbedExtract
+## 📱 Usage Guide
 
-embed_extract = EmbedExtract()
+### GUI Mode
 
-# Embed data into an MP4 file
-success = embed_extract.embed_video('video.mp4', b'secret data')
-if success:
-    print("Data embedded successfully.")
+<div align="center">
+
+```
+┌─────────────────────────────────┐
+│       Steganography Tool        │
+├─────────────────────────────────┤
+│ ┌─────────┐       ┌─────────┐   │
+│ │  Embed  │       │ Extract │   │
+│ └─────────┘       └─────────┘   │
+│                                 │
+│ ┌─────────────────────────────┐ │
+│ │ Select Image:             ▼ │ │
+│ └─────────────────────────────┘ │
+│                                 │
+│ ┌─────────────────────────────┐ │
+│ │ Message:                     │ │
+│ │ [                          ] │ │
+│ └─────────────────────────────┘ │
+│                                 │
+│ ┌─────────────────────────────┐ │
+│ │ Password:                    │ │
+│ │ [                          ] │ │
+│ └─────────────────────────────┘ │
+│                                 │
+│ ┌─────────────────────────────┐ │
+│ │        Process Data         │ │
+│ └─────────────────────────────┘ │
+└─────────────────────────────────┘
 ```
 
-#### Extract Data from a Video File
-```python
-from GUI.EmbedExtract import EmbedExtract
+</div>
 
-embed_extract = EmbedExtract()
+1. Select either "Embed" or "Extract" mode
+2. Choose your carrier image (or stego image for extraction)
+3. Enter your secret message or select a file to hide
+4. Set a strong password (essential for security)
+5. Click "Process Data" to begin
 
-# Extract data from the embedded MP4 file
-extracted_data = embed_extract.extract_video('video_embedded.mp4')
-if extracted_data:
-    print("Data extracted:", extracted_data)
+### Command Line Options
+
+<details>
+<summary>🔍 View complete command line options</summary>
+
+```
+Usage: stego.py [embed|extract] [options]
+
+Embed Mode:
+  -i, --input FILE       Input carrier image
+  -o, --output FILE      Output steganographic image
+  -m, --message TEXT     Message to hide
+  -f, --file FILE        File to hide (alternative to message)
+  -p, --password TEXT    Encryption password
+  -b, --bits N           Bits per byte to use [1-4], default: 2
+  -d, --distribution     Bit distribution pattern [sequential|random]
+
+Extract Mode:
+  -i, --input FILE       Input steganographic image
+  -o, --output FILE      Output file for extracted data (optional)
+  -p, --password TEXT    Decryption password
+  
+General Options:
+  -v, --verbose          Show detailed output
+  -h, --help             Show this help message
 ```
 
-### Batch Processing
+</details>
 
-#### Batch Embed
-```python
-from GUI.EmbedExtract import EmbedExtract, Cryptography, Compressor
-from GUI.batch_processor import BatchProcessor
+---
 
-# Initialize components
-embed_extract = EmbedExtract()
-crypto = Cryptography()
-compressor = Compressor()
-batch_processor = BatchProcessor(embed_extract, crypto, compressor)
+## 🔒 Security Details
 
-# Define a progress callback function
-def update_progress(completed, total):
-    print(f"Progress: {completed}/{total} files processed")
+<div align="center">
 
-batch_processor.set_progress_callback(update_progress)
-
-# Embed the same data into multiple image files
-with open('secret_data.txt', 'rb') as f:
-    payload_data = f.read()
-
-# Get all PNG files in a directory
-import glob
-carrier_files = glob.glob('/path/to/images/*.png')
-
-# Process the batch with encryption and compression
-results = batch_processor.process_batch_embed(
-    'png',                 # File format
-    carrier_files,         # List of carrier files
-    payload_data,          # Data to embed
-    encrypt=True,          # Enable encryption
-    compress=True,         # Enable compression
-    max_workers=4          # Number of parallel processes
-)
-
-# Check results
-for file, success in results.items():
-    print(f"{file}: {'Success' if success else 'Failed'}")
+```mermaid
+graph TD
+    A[Original Data] --> B{Encryption Needed?}
+    B -->|Yes| C[AES-256 Encryption]
+    B -->|No| D[Raw Data]
+    C --> E[Steganography Engine]
+    D --> E
+    E --> F[Carrier Image Analysis]
+    F --> G[Bit Manipulation]
+    G --> H[Steganographic Image]
+    
+    style A fill:#3498db,stroke:#333,stroke-width:2px,color:white
+    style C fill:#e74c3c,stroke:#333,stroke-width:2px,color:white
+    style E fill:#2ecc71,stroke:#333,stroke-width:2px,color:white
+    style H fill:#f39c12,stroke:#333,stroke-width:2px,color:white
 ```
 
-#### Batch Extract
-```python
-from GUI.EmbedExtract import EmbedExtract, Cryptography, Compressor
-from GUI.batch_processor import BatchProcessor
+</div>
 
-# Initialize components
-embed_extract = EmbedExtract()
-crypto = Cryptography()
-compressor = Compressor()
-batch_processor = BatchProcessor(embed_extract, crypto, compressor)
+This tool employs several layers of security to protect your data:
 
-# Define a progress callback function
-def update_progress(completed, total):
-    print(f"Progress: {completed}/{total} files processed")
+### Encryption Layer
 
-batch_processor.set_progress_callback(update_progress)
+- **🔑 AES-256**: Military-grade encryption algorithm
+- **🧂 Password Salting**: Protects against rainbow table attacks
+- **🔄 Iteration Stretching**: PBKDF2 with thousands of iterations to slow brute-force attacks
 
-# Get all embedded PNG files in a directory
-import glob
-carrier_files = glob.glob('/path/to/embedded/images/*.png')
+### Steganographic Layer
 
-# Extract data from all files to an output directory
-results = batch_processor.process_batch_extract(
-    'png',                     # File format
-    carrier_files,             # List of carrier files
-    '/path/to/output/dir',     # Output directory
-    encrypt=True,              # Data is encrypted
-    compress=True,             # Data is compressed
-    max_workers=4              # Number of parallel processes
-)
+- **🔍 LSB (Least Significant Bit) Technique**: Modifies the least significant bits of pixel data to store information
+- **📊 Statistical Attack Protection**: Optional random distribution of hidden data
+- **🧩 Signature Removal**: Eliminates common steganographic signatures that detection tools look for
 
-# Check results
-for file, success in results.items():
-    print(f"{file}: {'Success' if success else 'Failed'}")
+### Best Practices
+
+- **✅ Use strong, unique passwords** (12+ characters with mixed case, numbers, and symbols)
+- **✅ Prefer PNG or BMP formats** for more reliable data hiding
+- **✅ Use lower bit depths** (1-2 bits) for less detectable changes
+- **✅ Avoid sharing original carrier images** that could be used for comparison
+- **✅ Use secure channels** to share steganographic images
+
+---
+
+## 🔧 Supported Formats
+
+### Image Formats
+
+| Format | Support Level | Notes |
+|--------|---------------|-------|
+| PNG | ★★★★★ | Best option with lossless compression |
+| BMP | ★★★★★ | Excellent choice with no compression |
+| TIFF | ★★★☆☆ | Good for larger capacity needs |
+| JPG | ★★☆☆☆ | Limited reliability due to lossy compression |
+| GIF | ★☆☆☆☆ | Very limited capacity |
+
+### Data Types
+
+- **✅ Plain text** (UTF-8 encoded)
+- **✅ Binary files** (any file type)
+- **✅ Compressed data** (automatically compressed when beneficial)
+
+---
+
+## 🔍 How It Works
+
+<div align="center">
+
+![LSB Steganography Example](https://via.placeholder.com/800x250/0d1117/38b0de?text=LSB+Steganography+Visualization)
+
+</div>
+
+### LSB (Least Significant Bit) Technique
+
+LSB steganography works by replacing the least significant bits of the image pixel values with bits from the secret data:
+
+```
+Original pixel: 00101101 11010100 10101011
+                       ↓         ↓        ↓
+Secret bits:           1         0        1
+                       ↓         ↓        ↓
+Modified pixel: 00101101 11010100 10101011
+                       ↑         ↑        ↑
+                Changed  Unchanged Changed
 ```
 
-### Steganography Detection
+These changes are virtually imperceptible to the human eye but can be extracted with the right software and password.
 
-```python
-from GUI.stego_detector import StegoDetector
+### Process Flow
 
-# Initialize the detector
-detector = StegoDetector()
+1. **Data Preparation**:
+   - Text conversion or file reading
+   - Optional compression
+   - Encryption with user's password
 
-# Detect steganography in an image file
-probability, details, file_type, interpretation = detector.detect_file('image.png')
+2. **Carrier Analysis**:
+   - Calculate maximum embedding capacity
+   - Verify carrier can hold the data
+   - Generate embedding map (sequential or random)
 
-# Display the results
-print(f"Detection Result: {probability:.2%} - {interpretation}")
-print(f"File Type: {file_type}")
-print("\nAnalysis Details:")
-for key, value in details.items():
-    if isinstance(value, float):
-        print(f"- {key}: {value:.4f}")
-    else:
-        print(f"- {key}: {value}")
+3. **Data Embedding**:
+   - Distribute encrypted data bits throughout the image
+   - Modify least significant bits of pixels
+   - Save resulting steganographic image
+
+4. **Data Extraction**:
+   - Read modified bits from steganographic image
+   - Reconstruct hidden data
+   - Decrypt with user's password
+   - Present recovered information
+
+---
+
+## 🛠️ Troubleshooting
+
+<details>
+<summary>❓ Common Issues and Solutions</summary>
+
+### Installation Problems
+
+**Issue**: `ModuleNotFoundError` when running the script
+**Solution**: Ensure all dependencies are installed:
+```bash
+pip install -r requirements.txt
 ```
 
-## 📸 Screenshots
+**Issue**: Permission errors during installation
+**Solution**: Try installing with elevated privileges or use a virtual environment:
+```bash
+# On Windows (as Administrator)
+pip install -r requirements.txt
 
-<p align="center">
-  <img src="screenshots/embed_tab.png" width="48%" alt="Embed Tab">
-  <img src="screenshots/extract_tab.png" width="48%" alt="Extract Tab">
-</p>
+# On macOS/Linux
+sudo pip install -r requirements.txt
+# OR
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-## 🛣️ Roadmap
+### Usage Problems
 
-Future enhancements planned for the Steganography Tool:
+**Issue**: "Carrier capacity exceeded" error
+**Solution**: Either:
+- Use a larger image
+- Compress your secret data
+- Reduce the amount of data you're trying to hide
 
-- **Enhanced Audio Support**: Add support for MP3 and other audio formats
-- **Advanced Video Options**: Configure which frames to use for embedding
-- **Multiple Carrier Support**: Split large payloads across multiple carrier files
-- **Advanced Encryption Options**: Add more encryption algorithms and options
-- **Custom File Headers**: Allow users to create custom file headers for improved stealth
-- **Watermarking**: Add digital watermarking capabilities
-- **Advanced Detection Methods**: Implement machine learning-based detection
-- **Password Protection**: Add password protection for encrypted data
-- **Network Steganography**: Add protocols for hiding data in network traffic
-- **Cloud Integration**: Add capability to embed/extract from cloud storage providers
+**Issue**: Cannot extract data correctly
+**Solution**:
+- Ensure you're using the exact same password used during embedding
+- Verify the steganographic image hasn't been modified or compressed
+- Check if you're using the correct extraction mode
+
+**Issue**: Poor image quality after embedding
+**Solution**:
+- Use PNG or BMP formats instead of JPG
+- Reduce bits per byte setting (use `-b 1` parameter)
+- Choose a more suitable carrier image with more complex patterns
+
+</details>
+
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you'd like to improve the Steganography Tool, please follow these steps:
+Contributions are welcome! Help make this tool even better:
 
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'Add some amazing feature'`)
-5. Push to the branch (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
+1. **Fork the repository**
+2. **Create a feature branch**:
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Commit your changes**:
+   ```bash
+   git commit -m 'Add some amazing feature'
+   ```
+4. **Push to your branch**:
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. **Open a Pull Request**
 
-Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for detailed information.
+### Development Ideas
 
-## 📄 License
+- 🌟 Support for audio steganography
+- 🌟 Video steganography capabilities
+- 🌟 Web-based interface
+- 🌟 Improved resistance to steganalysis
+- 🌟 Additional encryption options
+- 🌟 Mobile application version
+
+---
+
+## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgements
+---
 
-- [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI) - For the GUI framework
-- [Pillow](https://python-pillow.org/) - For image manipulation
-- [PyPDF2](https://github.com/mstamy2/PyPDF2) - For PDF manipulation
-- [QRCode](https://github.com/lincolnloop/python-qrcode) - For QR code generation
-- [Pyzbar](https://github.com/NaturalHistoryMuseum/pyzbar) - For QR code reading
-- [OpenCV](https://opencv.org/) - For video processing
-- [NumPy](https://numpy.org/) - For numerical operations
+## 👤 Author
 
-## 📬 Contact
+<div align="center">
+  
+**Created by [elithaxxor](https://github.com/elithaxxor)**
 
-If you have any questions or feedback, feel free to reach out to the project maintainer at [maintainer@example.com](mailto:maintainer@example.com).
+[![GitHub](https://img.shields.io/badge/GitHub-elithaxxor-181717?style=for-the-badge&logo=github)](https://github.com/elithaxxor)
+
+<p>Built with ❤️ for the cybersecurity and privacy community</p>
+
+</div>
 
 ---
 
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/elithaxxor">elithaxxor</a>
+  <img src="https://via.placeholder.com/1200x300/0d1117/38b0de?text=Hide+in+Plain+Sight:+Steganography+Tool" alt="Steganography Tool Footer">
 </p>
+
+<div align="center">
+
+**[Documentation](https://github.com/elithaxxor/Steganography-Tool/wiki)** | 
+**[Report Bug](https://github.com/elithaxxor/Steganography-Tool/issues)** | 
+**[Request Feature](https://github.com/elithaxxor/Steganography-Tool/issues)**
+
+<p align="center">
+⭐ Star this repo if you found it useful! ⭐
+</p>
+
+</div>
