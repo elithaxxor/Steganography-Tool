@@ -29,7 +29,7 @@ def create_main_window():
         [sg.HorizontalSeparator()],
         [sg.TabGroup([[
             sg.Tab('Embed', [
-                [sg.Text('File Format:'), sg.Combo(['jpeg', 'png', 'gif', 'pdf', 'qr'], default_value='jpeg', key='format')],
+                [sg.Text('File Format:'), sg.Combo(['jpeg', 'png', 'gif', 'pdf', 'qr', 'wav', 'mp4'], default_value='jpeg', key='format')],
                 [sg.Text('Carrier File:'), sg.Input(key='carrier'), sg.FileBrowse()],
                 [sg.Text('Payload File:'), sg.Input(key='payload'), sg.FileBrowse()],
                 [sg.Text('Optional: Encrypt'), sg.Checkbox('', key='encrypt')],
@@ -37,7 +37,7 @@ def create_main_window():
                 [sg.Button('Embed Data')]
             ]),
             sg.Tab('Extract', [
-                [sg.Text('File Format:'), sg.Combo(['jpeg', 'png', 'gif', 'pdf', 'qr'], default_value='jpeg', key='x_format')],
+                [sg.Text('File Format:'), sg.Combo(['jpeg', 'png', 'gif', 'pdf', 'qr', 'wav', 'mp4'], default_value='jpeg', key='x_format')],
                 [sg.Text('Carrier File:'), sg.Input(key='x_carrier'), sg.FileBrowse()],
                 [sg.Text('Output Path:'), sg.Input(key='x_output'), sg.FileSaveAs()],
                 [sg.Text('Encrypted?'), sg.Checkbox('', key='x_encrypt')],
@@ -47,8 +47,8 @@ def create_main_window():
         ]])],
         [sg.Button('Exit')]
     ]
+    
     return sg.Window('EmbedExtract GUI', layout, element_justification='center', finalize=True)
-
 def handle_embed(embed_extract, crypto, compressor, values):
     """Handle the embedding process."""
     file_format = values['format']
@@ -96,6 +96,20 @@ def handle_embed(embed_extract, crypto, compressor, values):
                 return
             success = embed_extract.embed_qr(data, output_path)
         
+        elif file_format == 'wav':
+            if not (carrier_path and os.path.isfile(carrier_path)):
+                sg.popup_error('Invalid carrier file.')
+                return
+            # Embed the data into the WAV file
+            success = embed_extract.embed_audio(carrier_path, data)
+        
+        elif file_format == 'mp4':
+            if not (carrier_path and os.path.isfile(carrier_path)):
+                sg.popup_error('Invalid carrier file.')
+                return
+            # Embed the data into the video file
+            success = embed_extract.embed_video(carrier_path, data)
+        
         else:
             sg.popup_error(f'Unsupported file format: {file_format}')
             return
@@ -139,6 +153,12 @@ def handle_extract(embed_extract, crypto, compressor, values):
         elif file_format == 'qr':
             data = embed_extract.extract_qr(carrier_path)
         
+        elif file_format == 'wav':
+            data = embed_extract.extract_audio(carrier_path)
+        
+        elif file_format == 'mp4':
+            data = embed_extract.extract_video(carrier_path)
+        
         else:
             sg.popup_error(f'Unsupported file format: {file_format}')
             return
@@ -174,6 +194,7 @@ def handle_extract(embed_extract, crypto, compressor, values):
     except Exception as e:
         sg.popup_error(f'Error: {str(e)}')
         logging.exception('Exception in data extraction')
+
 
 def main():
     """Main function to setup and run the GUI application."""
