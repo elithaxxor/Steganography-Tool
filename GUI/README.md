@@ -81,3 +81,36 @@ If you have any questions or feedback, feel free to reach out to the project mai
 
 ![Extract Tab](screenshots/extract_tab.png)
 *Extract Tab*
+# Steganography Tool
+
+This repository provides a steganography tool that allows users to embed and extract data into/from various file formats, including images (JPEG, PNG, GIF), PDFs, and QR codes. The tool also supports encryption and compression of data for enhanced security and efficiency.
+
+## Features
+
+- **Image Steganography**: Embed and extract data into/from image files (JPEG, PNG, GIF).
+- **PDF Steganography**: Embed and extract data into/from PDF files.
+- **QR Code Steganography**: Embed and extract data into/from QR code images.
+- **Encryption**: Encrypt and decrypt data using the Fernet symmetric encryption.
+- **Compression**: Compress and decompress data using zlib.
+
+## Requirements
+
+- Python 3.x
+- Required Python packages:
+  - `os`
+  - `io`
+  - `zlib`
+  - `base64`
+  - `logging`
+  - `PyPDF2`
+  - `qrcode`
+  - `PIL` (Pillow)
+  - `cryptography`
+  - `pyzbar`
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/elithaxxor/Steganography-Tool.git
+   cd Steganography-Tool
