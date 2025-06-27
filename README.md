@@ -18,6 +18,7 @@
 | **Metadata** | EXIF / IPTC inject / wipe with ExifTool |
 | **Forensics** | Binwalk & pdf‑parser one‑click payload carving |
 | **Automation** | Plugin runner with auto tool detection, async CLI, REST `/api/v3/*` |
+| **Plugins** | Adapters for OutGuess, StegHide, Zsteg & StegExpose |
 | **GUI** | Advanced tab + detection pane, progress bars |
 | **CI / DevOps** | GitHub Actions, Docker, coverage badge |
 | **Install** | `./install-apt.sh` or `./install-brew.sh` – one line |
@@ -33,16 +34,24 @@ sudo ./install-apt.sh       # ↔  ./install-brew.sh on macOS
 # 2. Launch the GUI
 python -m steganography_tool.gui
 
-# 3. Hide a secret with OutGuess
+# 3. Hide a secret with OutGuess (or StegHide)
 stego.py plugin --tool outguess \
        --action embed \
        -i carrier.jpg -p secret.txt -o secret.jpg
+
+# Example detection with Zsteg
+stego.py plugin --tool zsteg \
+       --action detect \
+       -i suspicious.png -o result.txt
 
 # 4. Run the REST API
 python api.py
 
 # 5. Detect hidden content in bulk
 stego.py detect --in ./suspicious_samples --tool stegxpose --report report.csv
+
+The GUI now includes an **advanced detection pane** with real-time progress bars to
+visualize analysis of images, audio and videos.
 
 
 # 🔒 Steganography Tool v2.0 (GUI) 

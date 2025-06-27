@@ -7,3 +7,6 @@ pyzbar
 Pillow
 Flask
 pytest
+PySimpleGUI
+numpy
+opencv-python
