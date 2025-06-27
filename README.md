@@ -204,6 +204,9 @@ cd Steganography-Tool
 
 # Install dependencies
 pip install -r requirements.txt
+
+# Or run the helper script to create a virtual environment
+bash setup.sh
 ```
 
 ### Option 2: Download ZIP

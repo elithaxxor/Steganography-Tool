@@ -14,3 +14,6 @@
 - Package the tool using PyInstaller for easy distribution.
 - Implement optional in-memory encryption for sensitive payloads.
 - Provide a plugin marketplace to share community extensions.
+- Add batch processing mode for entire directories with progress summaries.
+- Integrate optional cloud storage backends for remote payload retrieval.
+- Support external key management systems for passwordless encryption.
