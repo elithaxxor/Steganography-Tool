@@ -5,28 +5,24 @@ import asyncio
 import argparse
 from pathlib import Path
 
-from stego_plugins import (
-    OutGuess,
-    StegHide,
-    Zsteg,
-    StegExpose,
-    Aletheia,
-    StegDetector,
-    AudioLSB,
-    Watermark,
-    PluginError,
-)
+from stego_plugins import discover_plugins, PluginError
+from tqdm import tqdm
 
-PLUGIN_MAP = {
-    "outguess": OutGuess,
-    "steghide": StegHide,
-    "zsteg": Zsteg,
-    "stegexpose": StegExpose,
-    "aletheia": Aletheia,
-    "steg-detector": StegDetector,
-    "audio-lsb": AudioLSB,
-    "watermark": Watermark,
-}
+
+async def run_with_progress(coro: asyncio.Future, desc: str) -> str:
+    """Display a simple progress bar while awaiting a coroutine."""
+    task = asyncio.create_task(coro)
+    with tqdm(total=100, desc=desc) as prog:
+        while not task.done():
+            await asyncio.sleep(0.1)
+            prog.update(1)
+            if prog.n >= 100:
+                prog.n = 0
+                prog.refresh()
+        prog.update(100 - prog.n)
+    return await task
+
+PLUGIN_MAP = discover_plugins()
 
 
 async def run_plugin(args: argparse.Namespace) -> None:
@@ -40,13 +36,21 @@ async def run_plugin(args: argparse.Namespace) -> None:
 
     try:
         if action == "embed":
-            await plugin.embed(Path(args.infile), Path(args.payload), Path(args.output))
+            await run_with_progress(
+                plugin.embed(Path(args.infile), Path(args.payload), Path(args.output)),
+                f"{tool} embed",
+            )
             print("Embed successful")
         elif action == "extract":
-            await plugin.extract(Path(args.infile), Path(args.output))
+            await run_with_progress(
+                plugin.extract(Path(args.infile), Path(args.output)),
+                f"{tool} extract",
+            )
             print("Extraction successful")
         elif action == "detect" and hasattr(plugin, "detect"):
-            result = await plugin.detect(Path(args.infile))
+            result = await run_with_progress(
+                plugin.detect(Path(args.infile)), f"{tool} detect"
+            )
             print(result)
         else:
             raise SystemExit(f"Unsupported action: {action}")
