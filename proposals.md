@@ -14,3 +14,8 @@
 - Package the tool using PyInstaller for easy distribution.
 - Implement optional in-memory encryption for sensitive payloads.
 - Provide a plugin marketplace to share community extensions.
+
+### Additional Ideas
+- Create a Python API for scripted workflows and automation.
+- Explore GPU-accelerated steganalysis with pre-trained models.
+- Run third-party tools in lightweight containers for isolation.
