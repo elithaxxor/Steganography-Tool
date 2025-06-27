@@ -5,7 +5,13 @@ from pathlib import Path
 
 from flask import Flask, jsonify, request, send_file
 
-from stego_plugins import OutGuess, PluginError
+from stego_plugins import (
+    OutGuess,
+    StegHide,
+    Zsteg,
+    StegExpose,
+    PluginError,
+)
 
 app = Flask(__name__)
 
@@ -17,11 +23,19 @@ def plugin_route(tool: str, action: str):
     payload = Path(args.get("payload", "")) if args.get("payload") else None
     output = Path(args.get("output", "output.bin"))
 
-    if tool != "outguess":
+    if tool == "outguess":
+        plugin_cls = OutGuess
+    elif tool == "steghide":
+        plugin_cls = StegHide
+    elif tool == "zsteg":
+        plugin_cls = Zsteg
+    elif tool == "stegexpose":
+        plugin_cls = StegExpose
+    else:
         return jsonify({"error": "unsupported tool"}), 400
 
     try:
-        plugin = OutGuess()
+        plugin = plugin_cls()
     except PluginError as exc:
         return jsonify({"error": str(exc)}), 500
 
@@ -31,6 +45,9 @@ def plugin_route(tool: str, action: str):
                 await plugin.embed(infile, payload, output)
             elif action == "extract":
                 await plugin.extract(infile, output)
+            elif action == "detect" and hasattr(plugin, "detect"):
+                result = await plugin.detect(infile)
+                return result
             else:
                 return jsonify({"error": "unsupported action"}), 400
             return None
@@ -38,10 +55,12 @@ def plugin_route(tool: str, action: str):
             return str(exc)
 
     loop = asyncio.new_event_loop()
-    err = loop.run_until_complete(run())
+    result = loop.run_until_complete(run())
     loop.close()
-    if err:
-        return jsonify({"error": err}), 500
+    if isinstance(result, str):
+        return jsonify({"result": result})
+    if result:
+        return jsonify({"error": result}), 500
     return send_file(output, as_attachment=True)
 
 

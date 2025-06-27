@@ -478,7 +478,11 @@ def handle_detect(window, stego_detector, values):
         
         # Perform detection
         probability, details, file_type, interpretation = stego_detector.detect_file(file_path)
-        
+        window['progress_detect'].update(60)
+
+        # Simulate some processing delay for UI responsiveness
+        window.refresh()
+
         window['progress_detect'].update(100)
         
         # Format result message
