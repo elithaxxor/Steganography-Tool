@@ -15,6 +15,10 @@
 - Implement optional in-memory encryption for sensitive payloads.
 - Provide a plugin marketplace to share community extensions.
 
+### Additional Ideas
+- Create a Python API for scripted workflows and automation.
+- Explore GPU-accelerated steganalysis with pre-trained models.
+- Run third-party tools in lightweight containers for isolation.
 - Support distributed scanning across remote workers.
 - Integrate GPU acceleration for compute-intensive algorithms.
 - Provide cross-platform desktop packaging for macOS and Windows.
