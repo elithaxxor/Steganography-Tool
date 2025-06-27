@@ -17,7 +17,7 @@
 | **Detection** | StegExpose, Zsteg & StegSeek integration |
 | **Metadata** | EXIF / IPTC inject / wipe with ExifTool |
 | **Forensics** | Binwalk & pdf‑parser one‑click payload carving |
-| **Automation** | Plugin runner, async CLI, REST `/api/v3/*` |
+| **Automation** | Plugin runner with auto tool detection, async CLI, REST `/api/v3/*` |
 | **GUI** | Advanced tab + detection pane, progress bars |
 | **CI / DevOps** | GitHub Actions, Docker, coverage badge |
 | **Install** | `./install-apt.sh` or `./install-brew.sh` – one line |
@@ -38,7 +38,10 @@ stego.py plugin --tool outguess \
        --action embed \
        -i carrier.jpg -p secret.txt -o secret.jpg
 
-# 4. Detect hidden content in bulk
+# 4. Run the REST API
+python api.py
+
+# 5. Detect hidden content in bulk
 stego.py detect --in ./suspicious_samples --tool stegxpose --report report.csv
 
 
