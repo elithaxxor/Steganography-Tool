@@ -10,3 +10,5 @@ pytest
 PySimpleGUI
 numpy
 opencv-python
+pydub
+dnspython

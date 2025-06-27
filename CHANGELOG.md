@@ -11,3 +11,12 @@
 - Pytest unit test for missing OutGuess binary.
 - Additional unit tests for new plugins.
 - Requirements update and setup script.
+
+## [4.0] - 2024-04-30
+### Added
+- Aletheia and STEG-Detector machine learning detection plugins.
+- Audio LSB steganography module.
+- AES-GCM watermarking plugin.
+- Network covert channel support (HTTP headers & DNS queries).
+- Unified plugin loader used by CLI and REST API.
+- Tests for new plugins and audio embedding.
