@@ -1,3 +1,47 @@
+# Steganography‑Tool v3.0 “DeepCover”
+
+> Conceal or reveal secrets in **images, audio, video, PDFs and QR codes** – now with integrated detection, metadata scrubbing and bulk‑analysis.
+
+![CI](https://github.com/elithaxxor/Steganography-Tool/actions/workflows/ci.yml/badge.svg)
+![License](https://img.shields.io/github/license/elithaxxor/Steganography-Tool)
+![Version](https://img.shields.io/badge/version-3.0-blue)
+
+---
+
+## ✨ What’s new in v3.0
+
+| Area | Enhancement |
+|------|-------------|
+| **Algorithms** | OutGuess (F5), Steghide (Blowfish/AES), QR‑stego |
+| **Media Types** | Full audio (WAV) & video (MP4) embedding via FFmpeg |
+| **Detection** | StegExpose, Zsteg & StegSeek integration |
+| **Metadata** | EXIF / IPTC inject / wipe with ExifTool |
+| **Forensics** | Binwalk & pdf‑parser one‑click payload carving |
+| **Automation** | Plugin runner, async CLI, REST `/api/v3/*` |
+| **GUI** | Advanced tab + detection pane, progress bars |
+| **CI / DevOps** | GitHub Actions, Docker, coverage badge |
+| **Install** | `./install-apt.sh` or `./install-brew.sh` – one line |
+
+---
+
+## Quick‑start
+
+```bash
+# 1. Install deps (Debian/Ubuntu/Kali)
+sudo ./install-apt.sh       # ↔  ./install-brew.sh on macOS
+
+# 2. Launch the GUI
+python -m steganography_tool.gui
+
+# 3. Hide a secret with OutGuess
+stego.py plugin --tool outguess \
+       --action embed \
+       -i carrier.jpg -p secret.txt -o secret.jpg
+
+# 4. Detect hidden content in bulk
+stego.py detect --in ./suspicious_samples --tool stegxpose --report report.csv
+
+
 # 🔒 Steganography Tool v2.0 (GUI) 
 
 <div align="center">
