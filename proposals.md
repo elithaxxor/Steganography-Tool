@@ -9,3 +9,8 @@
 - Integrate diffusion model based video steganography.
 - Build VoIP timing channel module.
 - Provide HTML/JSON forensic reporting dashboard.
+- Introduce dynamic plugin discovery to simplify third-party extensions.
+- Add real-time CLI progress bars for long-running operations.
+- Package the tool using PyInstaller for easy distribution.
+- Implement optional in-memory encryption for sensitive payloads.
+- Provide a plugin marketplace to share community extensions.
