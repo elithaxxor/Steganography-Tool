@@ -6,3 +6,6 @@
 - Add automatic download/setup scripts for common external tools.
 - Implement reporting dashboard for bulk detection results.
 - Offer web-based interface using Flask for remote control.
+- Integrate diffusion model based video steganography.
+- Build VoIP timing channel module.
+- Provide HTML/JSON forensic reporting dashboard.

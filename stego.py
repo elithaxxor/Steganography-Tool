@@ -5,23 +5,38 @@ import asyncio
 import argparse
 from pathlib import Path
 
-from stego_plugins import OutGuess, StegHide, Zsteg, StegExpose, PluginError
+from stego_plugins import (
+    OutGuess,
+    StegHide,
+    Zsteg,
+    StegExpose,
+    Aletheia,
+    StegDetector,
+    AudioLSB,
+    Watermark,
+    PluginError,
+)
+
+PLUGIN_MAP = {
+    "outguess": OutGuess,
+    "steghide": StegHide,
+    "zsteg": Zsteg,
+    "stegexpose": StegExpose,
+    "aletheia": Aletheia,
+    "steg-detector": StegDetector,
+    "audio-lsb": AudioLSB,
+    "watermark": Watermark,
+}
 
 
 async def run_plugin(args: argparse.Namespace) -> None:
     tool = args.tool
     action = args.action
 
-    if tool == "outguess":
-        plugin = OutGuess()
-    elif tool == "steghide":
-        plugin = StegHide()
-    elif tool == "zsteg":
-        plugin = Zsteg()
-    elif tool == "stegexpose":
-        plugin = StegExpose()
-    else:
+    plugin_cls = PLUGIN_MAP.get(tool)
+    if not plugin_cls:
         raise SystemExit(f"Unsupported tool: {tool}")
+    plugin = plugin_cls()
 
     try:
         if action == "embed":

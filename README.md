@@ -1,24 +1,26 @@
-# Steganography‑Tool v3.0 “DeepCover”
+# Steganography‑Tool v4.0 “DeepCover 2”
 
 > Conceal or reveal secrets in **images, audio, video, PDFs and QR codes** – now with integrated detection, metadata scrubbing and bulk‑analysis.
 
 ![CI](https://github.com/elithaxxor/Steganography-Tool/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/github/license/elithaxxor/Steganography-Tool)
-![Version](https://img.shields.io/badge/version-3.0-blue)
+![Version](https://img.shields.io/badge/version-4.0-blue)
 
 ---
 
-## ✨ What’s new in v3.0
+## ✨ What’s new in v4.0
 
 | Area | Enhancement |
 |------|-------------|
 | **Algorithms** | OutGuess (F5), Steghide (Blowfish/AES), QR‑stego |
 | **Media Types** | Full audio (WAV) & video (MP4) embedding via FFmpeg |
-| **Detection** | StegExpose, Zsteg & StegSeek integration |
+| **Detection** | StegExpose, Zsteg, StegSeek, **Aletheia** & **STEG‑Detector** |
 | **Metadata** | EXIF / IPTC inject / wipe with ExifTool |
 | **Forensics** | Binwalk & pdf‑parser one‑click payload carving |
-| **Automation** | Plugin runner with auto tool detection, async CLI, REST `/api/v3/*` |
-| **Plugins** | Adapters for OutGuess, StegHide, Zsteg & StegExpose |
+| **Automation** | Plugin runner with auto tool detection, async CLI, REST `/api/v4/*` |
+| **Plugins** | Adapters for OutGuess, StegHide, Zsteg, StegExpose, Aletheia & STEG‑Detector |
+| **Watermarking** | AES‑GCM watermark embed/check |
+| **Network** | HTTP header & DNS covert channels |
 | **GUI** | Advanced tab + detection pane, progress bars |
 | **CI / DevOps** | GitHub Actions, Docker, coverage badge |
 | **Install** | `./install-apt.sh` or `./install-brew.sh` – one line |

@@ -10,8 +10,23 @@ from stego_plugins import (
     StegHide,
     Zsteg,
     StegExpose,
+    Aletheia,
+    StegDetector,
+    AudioLSB,
+    Watermark,
     PluginError,
 )
+
+PLUGIN_MAP = {
+    "outguess": OutGuess,
+    "steghide": StegHide,
+    "zsteg": Zsteg,
+    "stegexpose": StegExpose,
+    "aletheia": Aletheia,
+    "steg-detector": StegDetector,
+    "audio-lsb": AudioLSB,
+    "watermark": Watermark,
+}
 
 app = Flask(__name__)
 
@@ -23,15 +38,8 @@ def plugin_route(tool: str, action: str):
     payload = Path(args.get("payload", "")) if args.get("payload") else None
     output = Path(args.get("output", "output.bin"))
 
-    if tool == "outguess":
-        plugin_cls = OutGuess
-    elif tool == "steghide":
-        plugin_cls = StegHide
-    elif tool == "zsteg":
-        plugin_cls = Zsteg
-    elif tool == "stegexpose":
-        plugin_cls = StegExpose
-    else:
+    plugin_cls = PLUGIN_MAP.get(tool)
+    if not plugin_cls:
         return jsonify({"error": "unsupported tool"}), 400
 
     try:
