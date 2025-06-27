@@ -5,7 +5,7 @@ import asyncio
 import argparse
 from pathlib import Path
 
-from stego_plugins import OutGuess, PluginError
+from stego_plugins import OutGuess, StegHide, Zsteg, StegExpose, PluginError
 
 
 async def run_plugin(args: argparse.Namespace) -> None:
@@ -14,6 +14,12 @@ async def run_plugin(args: argparse.Namespace) -> None:
 
     if tool == "outguess":
         plugin = OutGuess()
+    elif tool == "steghide":
+        plugin = StegHide()
+    elif tool == "zsteg":
+        plugin = Zsteg()
+    elif tool == "stegexpose":
+        plugin = StegExpose()
     else:
         raise SystemExit(f"Unsupported tool: {tool}")
 
@@ -24,6 +30,9 @@ async def run_plugin(args: argparse.Namespace) -> None:
         elif action == "extract":
             await plugin.extract(Path(args.infile), Path(args.output))
             print("Extraction successful")
+        elif action == "detect" and hasattr(plugin, "detect"):
+            result = await plugin.detect(Path(args.infile))
+            print(result)
         else:
             raise SystemExit(f"Unsupported action: {action}")
     except PluginError as exc:
@@ -36,7 +45,7 @@ def main() -> None:
 
     plugin_parser = subparsers.add_parser("plugin", help="Run external stego tools")
     plugin_parser.add_argument("--tool", required=True, help="Tool name")
-    plugin_parser.add_argument("--action", required=True, choices=["embed", "extract"])
+    plugin_parser.add_argument("--action", required=True, choices=["embed", "extract", "detect"])
     plugin_parser.add_argument(
         "-i", "--infile", required=True, help="Input carrier file"
     )
