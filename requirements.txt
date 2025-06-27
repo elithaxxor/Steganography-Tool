@@ -1,2 +1,9 @@
-psutil
 colorama
+psutil
+cryptography
+PyPDF2
+qrcode
+pyzbar
+Pillow
+Flask
+pytest
