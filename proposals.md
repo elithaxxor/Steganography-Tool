@@ -14,6 +14,10 @@
 - Package the tool using PyInstaller for easy distribution.
 - Implement optional in-memory encryption for sensitive payloads.
 - Provide a plugin marketplace to share community extensions.
+
+- Support distributed scanning across remote workers.
+- Integrate GPU acceleration for compute-intensive algorithms.
+- Provide cross-platform desktop packaging for macOS and Windows.
 - Add batch processing mode for entire directories with progress summaries.
 - Integrate optional cloud storage backends for remote payload retrieval.
 - Support external key management systems for passwordless encryption.
