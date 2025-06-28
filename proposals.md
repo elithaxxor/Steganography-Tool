@@ -25,3 +25,10 @@
 - Add batch processing mode for entire directories with progress summaries.
 - Integrate optional cloud storage backends for remote payload retrieval.
 - Support external key management systems for passwordless encryption.
+
+### New Enhancement Ideas
+- Mobile-friendly web UI for scanning images on the go.
+- Automatic update checker for external plugins.
+- Visualization of detection results with interactive charts.
+- Plugin sandboxing using subprocess isolation.
+
