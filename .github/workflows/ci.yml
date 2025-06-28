@@ -12,5 +12,5 @@ jobs:
       - run: pip install flake8
       - run: pip install pip-audit
       - run: pip-audit -r requirements.txt
-      - run: flake8 stego_plugins stego.py api.py GUI || true
+      - run: flake8 stego_plugins stego.py api.py GUI
       - run: pytest -q
