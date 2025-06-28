@@ -9,6 +9,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
+      - run: pip install flake8
       - run: pip install pip-audit
       - run: pip-audit -r requirements.txt
+      - run: flake8 stego_plugins stego.py api.py GUI || true
       - run: pytest -q

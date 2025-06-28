@@ -8,6 +8,7 @@ import os
 import pkgutil
 import sys
 from types import ModuleType
+from functools import lru_cache
 from typing import Dict, Type, Iterable
 
 from .base import ExternalTool, PluginError
@@ -28,9 +29,10 @@ def _iter_modules() -> Iterable[ModuleType]:
             yield importlib.import_module(mod_name)
 
 
-def discover_plugins() -> Dict[str, Type]:
+@lru_cache(maxsize=1)
+def discover_plugins() -> Dict[str, Type[ExternalTool]]:
     """Return a mapping of plugin name to class by scanning this package."""
-    plugins: Dict[str, Type] = {}
+    plugins: Dict[str, Type[ExternalTool]] = {}
     for module in _iter_modules():
         for obj in module.__dict__.values():
             if inspect.isclass(obj) and getattr(obj, "name", None):
@@ -38,6 +40,12 @@ def discover_plugins() -> Dict[str, Type]:
                     continue
                 plugins[obj.name] = obj
     return plugins
+
+
+def reload_plugins() -> Dict[str, Type[ExternalTool]]:
+    """Clear the plugin cache and rediscover plugins."""
+    discover_plugins.cache_clear()
+    return discover_plugins()
 
 
 # Import common plugins so they remain accessible at module level
@@ -67,4 +75,5 @@ __all__ = [
     "NetworkStego",
     "DeepSteg",
     "discover_plugins",
+    "reload_plugins",
 ]

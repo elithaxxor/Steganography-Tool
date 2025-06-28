@@ -13,6 +13,15 @@ class StegExpose(ExternalTool):
     name = "stegexpose"
     executable = "stegexpose"
 
+    async def version(self) -> str:
+        """Return the version string from ``stegexpose --version``."""
+        process = await self.run(["--version"])
+        stdout, stderr = await process.communicate()
+        text = stdout.decode().strip() or stderr.decode().strip()
+        if process.returncode != 0:
+            raise PluginError(text)
+        return text
+
     async def detect(self, target: Path) -> str:
         process = await self.run([str(target)])
         stdout, stderr = await process.communicate()

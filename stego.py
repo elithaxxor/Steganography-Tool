@@ -5,7 +5,7 @@ import asyncio
 import argparse
 from pathlib import Path
 
-from stego_plugins import discover_plugins, PluginError
+from stego_plugins import discover_plugins, reload_plugins, PluginError
 from tqdm import tqdm
 
 
@@ -31,7 +31,11 @@ async def run_plugin(args: argparse.Namespace) -> None:
 
     plugin_cls = PLUGIN_MAP.get(tool)
     if not plugin_cls:
-        raise SystemExit(f"Unsupported tool: {tool}")
+        # try reloading in case new plugins were installed
+        PLUGIN_MAP.update(reload_plugins())
+        plugin_cls = PLUGIN_MAP.get(tool)
+        if not plugin_cls:
+            raise SystemExit(f"Unsupported tool: {tool}")
     plugin = plugin_cls()
 
     try:

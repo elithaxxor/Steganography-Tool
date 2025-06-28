@@ -11,6 +11,10 @@
 - Pytest unit test for missing OutGuess binary.
 - Additional unit tests for new plugins.
 - Requirements update and setup script.
+- Dynamic plugin discovery via `STEGO_PLUGIN_PATH`.
+- Simple HTML/JSON reporting dashboard (`reporting.py`).
+- `download_tools.sh` helper script for fetching external tools.
+- Basic Flask web interface (`webapp.py`).
 
 ## [4.0] - 2024-04-30
 ### Added
