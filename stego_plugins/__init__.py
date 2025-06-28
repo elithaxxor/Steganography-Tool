@@ -38,6 +38,7 @@ from .steg_detector import StegDetector
 from .audio_lsb import AudioLSB
 from .watermark import Watermark
 from .network_stego import NetworkStego
+from .deepsteg import DeepSteg
 
 
 __all__ = [
@@ -52,5 +53,6 @@ __all__ = [
     "AudioLSB",
     "Watermark",
     "NetworkStego",
+    "DeepSteg",
     "discover_plugins",
 ]
