@@ -276,6 +276,20 @@ will automatically download it from the public release URL on first use.
 No manual steps are required—simply invoke the plugin and the model will
 be retrieved and saved alongside the other plugins.
 
+### Third-Party Plugins
+
+You can extend the tool by loading external plugins from custom directories.
+Set the `STEGO_PLUGIN_PATH` environment variable to point to one or more
+locations that contain your plugin modules (use `:` to separate paths on
+Linux/macOS or `;` on Windows).
+
+```bash
+# Example: load plugins from two directories
+export STEGO_PLUGIN_PATH="/opt/stego_plugins:$HOME/my_plugins"
+stego.py plugin --tool myplugin \
+       --action embed -i cover.png -p secret.txt -o hidden.png
+```
+
 ---
 
 ## 📱 Usage Guide
