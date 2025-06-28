@@ -33,3 +33,6 @@ automated CI and the web interface have already been implemented.
 
 - Bundle Python wheel dependencies in a `vendor/` folder and provide an
   `offline_install.sh` script for air-gapped environments.
+- Add a DCT-based image plugin for JPEG steganography.
+- Integrate a password manager API for secure credential storage.
+- Command line 'wizard' mode for simplified operations.
