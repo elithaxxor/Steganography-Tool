@@ -14,11 +14,11 @@
 |------|-------------|
 | **Algorithms** | OutGuess (F5), Steghide (Blowfish/AES), QR‑stego |
 | **Media Types** | Full audio (WAV) & video (MP4) embedding via FFmpeg |
-| **Detection** | StegExpose, Zsteg, StegSeek, **Aletheia** & **STEG‑Detector** |
+| **Detection** | StegExpose, Zsteg, StegSeek, **Aletheia**, **STEG‑Detector** & **DeepSteg** |
 | **Metadata** | EXIF / IPTC inject / wipe with ExifTool |
 | **Forensics** | Binwalk & pdf‑parser one‑click payload carving |
 | **Automation** | Plugin runner with auto tool detection, async CLI, REST `/api/v4/*` |
-| **Plugins** | Adapters for OutGuess, StegHide, Zsteg, StegExpose, Aletheia & STEG‑Detector |
+| **Plugins** | Adapters for OutGuess, StegHide, Zsteg, StegExpose, Aletheia, STEG‑Detector & DeepSteg |
 | **Watermarking** | AES‑GCM watermark embed/check |
 | **Network** | HTTP header & DNS covert channels |
 | **GUI** | Advanced tab + detection pane, progress bars |
