@@ -25,3 +25,5 @@
 - Add batch processing mode for entire directories with progress summaries.
 - Integrate optional cloud storage backends for remote payload retrieval.
 - Support external key management systems for passwordless encryption.
+- Bundle Python wheel dependencies in a `vendor/` folder and provide an
+  `offline_install.sh` script for air-gapped environments.
