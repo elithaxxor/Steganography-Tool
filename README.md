@@ -32,6 +32,8 @@
 ```bash
 # 1. Install deps (Debian/Ubuntu/Kali)
 sudo ./install-apt.sh       # ↔  ./install-brew.sh on macOS
+# Optional: automatically install external tools
+./download_tools.sh
 
 # 2. Launch the GUI
 python -m steganography_tool.gui
@@ -134,6 +136,9 @@ mindmap
 - **📱 Intuitive Interface**: User-friendly design for all experience levels
 - **🔍 Minimal Footprint**: Changes to carrier images are virtually undetectable
 - **🔒 Data Protection**: Multi-layered security for your sensitive information
+- **🧩 Dynamic Plugin Discovery**: Drop-in plugins loaded via `STEGO_PLUGIN_PATH`
+- **📈 HTML/JSON Reporting**: Generate forensic dashboards from detection runs
+- **🌐 Web Interface**: Control tools remotely through a lightweight Flask app
 
 ---
 
