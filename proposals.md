@@ -14,6 +14,8 @@
 - Package the tool using PyInstaller for easy distribution.
 - Implement optional in-memory encryption for sensitive payloads.
 - Provide a plugin marketplace to share community extensions.
+- Incorporate an optional CLI wizard for guided setup.
+- Add sample datasets and notebooks demonstrating detection workflows.
 
 ### Additional Ideas
 - Create a Python API for scripted workflows and automation.
@@ -32,3 +34,5 @@
 - Visualization of detection results with interactive charts.
 - Plugin sandboxing using subprocess isolation.
 
+- Bundle Python wheel dependencies in a `vendor/` folder and provide an
+  `offline_install.sh` script for air-gapped environments.

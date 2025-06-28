@@ -18,7 +18,7 @@
 | **Metadata** | EXIF / IPTC inject / wipe with ExifTool |
 | **Forensics** | Binwalk & pdf‑parser one‑click payload carving |
 | **Automation** | Plugin runner with auto tool detection, async CLI, REST `/api/v4/*` |
-| **Plugins** | Adapters for OutGuess, StegHide, Zsteg, StegExpose, Aletheia & STEG‑Detector |
+| **Plugins** | Adapters for OutGuess, StegHide, Zsteg, StegExpose, Aletheia, STEG‑Detector & **DeepSteg** |
 | **Watermarking** | AES‑GCM watermark embed/check |
 | **Network** | HTTP header & DNS covert channels |
 | **GUI** | Advanced tab + detection pane, progress bars |
@@ -85,6 +85,7 @@ This powerful steganography suite enables you to hide sensitive information with
 - [🧩 Requirements](#-requirements)
 - [⚙️ Installation](#️-installation)
 - [🚀 Quick Start](#-quick-start)
+- [🧠 DeepSteg Model](#-deepsteg-model)
 - [📱 Usage Guide](#-usage-guide)
 - [🔒 Security Details](#-security-details)
 - [🔧 Supported Formats](#-supported-formats)
@@ -207,6 +208,9 @@ pip install -r requirements.txt
 
 # Or run the helper script to create a virtual environment
 bash setup.sh
+
+# Offline install (no internet)
+bash offline_install.sh
 ```
 
 ### Option 2: Download ZIP
@@ -216,6 +220,10 @@ bash setup.sh
 3. Extract the ZIP file to your preferred location
 4. Open a terminal/command prompt in the extracted directory
 5. Run `pip install -r requirements.txt`
+6. Offline install (no internet):
+   ```bash
+   bash offline_install.sh
+   ```
 
 <details>
 <summary>📋 View dependencies (requirements.txt)</summary>
@@ -252,6 +260,16 @@ python stego.py extract -i steganographic_image.png -p "YourPassword"
 # Or use the GUI version and select "Extract" mode
 python stego_gui.py
 ```
+
+---
+
+## 🧠 DeepSteg Model
+
+The neural detection plugin **DeepSteg** expects its model file
+`stego_plugins/deepsteg_model.pt`. If the file is missing, the plugin
+will automatically download it from the public release URL on first use.
+No manual steps are required—simply invoke the plugin and the model will
+be retrieved and saved alongside the other plugins.
 
 ---
 
