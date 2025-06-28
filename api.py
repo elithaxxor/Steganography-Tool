@@ -5,28 +5,9 @@ from pathlib import Path
 
 from flask import Flask, jsonify, request, send_file
 
-from stego_plugins import (
-    OutGuess,
-    StegHide,
-    Zsteg,
-    StegExpose,
-    Aletheia,
-    StegDetector,
-    AudioLSB,
-    Watermark,
-    PluginError,
-)
+from stego_plugins import discover_plugins, PluginError
 
-PLUGIN_MAP = {
-    "outguess": OutGuess,
-    "steghide": StegHide,
-    "zsteg": Zsteg,
-    "stegexpose": StegExpose,
-    "aletheia": Aletheia,
-    "steg-detector": StegDetector,
-    "audio-lsb": AudioLSB,
-    "watermark": Watermark,
-}
+PLUGIN_MAP = discover_plugins()
 
 app = Flask(__name__)
 
