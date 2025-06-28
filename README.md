@@ -208,6 +208,9 @@ pip install -r requirements.txt
 
 # Or run the helper script to create a virtual environment
 bash setup.sh
+
+# Offline install (no internet)
+bash offline_install.sh
 ```
 
 ### Option 2: Download ZIP
@@ -217,6 +220,10 @@ bash setup.sh
 3. Extract the ZIP file to your preferred location
 4. Open a terminal/command prompt in the extracted directory
 5. Run `pip install -r requirements.txt`
+6. Offline install (no internet):
+   ```bash
+   bash offline_install.sh
+   ```
 
 <details>
 <summary>📋 View dependencies (requirements.txt)</summary>
