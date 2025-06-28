@@ -31,5 +31,10 @@ automated CI and the web interface have already been implemented.
 - Visualization of detection results with interactive charts.
 - Plugin sandboxing using subprocess isolation.
 
+- Verify critical dependencies like `cryptography` during CI setup to avoid
+  missing-package errors.
+- Add optional logging plugin to track usage statistics while preserving
+  user privacy through anonymization.
+
 - Bundle Python wheel dependencies in a `vendor/` folder and provide an
   `offline_install.sh` script for air-gapped environments.

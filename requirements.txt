@@ -1,6 +1,6 @@
 colorama
 psutil
-cryptography
+cryptography>=3.4.7
 PyPDF2
 qrcode
 pyzbar
