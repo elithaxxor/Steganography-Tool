@@ -4,16 +4,28 @@ from __future__ import annotations
 
 import importlib
 import inspect
+import os
 import pkgutil
+import sys
 from types import ModuleType
-from typing import Dict, Type
+from typing import Dict, Type, Iterable
 
 from .base import ExternalTool, PluginError
 
 
-def _iter_modules() -> list[ModuleType]:
+def _iter_modules() -> Iterable[ModuleType]:
+    """Yield modules found in the package and any user plugin paths."""
+    # built-in plugins bundled with the package
     for _, name, _ in pkgutil.iter_modules(__path__):
         yield importlib.import_module(f"{__name__}.{name}")
+
+    # dynamically load plugins from STEGO_PLUGIN_PATH
+    extra_paths = os.environ.get("STEGO_PLUGIN_PATH", "")
+    for path in [p for p in extra_paths.split(os.pathsep) if p]:
+        if path not in sys.path:
+            sys.path.append(path)
+        for _, mod_name, _ in pkgutil.iter_modules([path]):
+            yield importlib.import_module(mod_name)
 
 
 def discover_plugins() -> Dict[str, Type]:
